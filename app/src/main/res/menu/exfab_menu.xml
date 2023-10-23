@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_add_feed"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="Add Feed" />
+    <item
+        android:id="@+id/menu_export_feed"
+        android:icon="@android:drawable/stat_sys_upload"
+        android:title="Export Feed" />
+    <item
+        android:id="@+id/menu_import_feed"
+        android:icon="@android:drawable/stat_sys_download"
+        android:title="Import Feed" />
+</menu>

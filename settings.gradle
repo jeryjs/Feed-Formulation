@@ -10,8 +10,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
-
-rootProject.name = "Feed Formulation"
+rootProject.name = "Feed Formulation 4"
 include ':app'
