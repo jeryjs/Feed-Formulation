@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Feed Formulation"
+rootProject.name = "Feed Formulation 7"
 include ':app'

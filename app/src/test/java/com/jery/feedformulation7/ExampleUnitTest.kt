@@ -1,4 +1,4 @@
-package com.jery.feedformulation
+package com.jery.feedformulation7
 
 import org.junit.Test
 

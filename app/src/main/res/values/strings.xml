@@ -1,3 +1,80 @@
 <resources>
-    <string name="app_name">Feed Formulation</string>
+    <string name="app_name">ICAR-NIAP Feed Formulation 7</string>
+
+    <string name="nianp_description">NIANP Building in Bangalore</string>
+
+    <string name="smartTool">Smart Tools</string>
+    <string name="smartTool1">TMR Maker</string>
+    <string name="smartTool2">Compounded Feed Maker</string>
+    <string name="smartTool3">Cattle Mineral Mix Maker</string>
+    <string name="smartTool4">Sheep and Goat Feed Formulator</string>
+
+    <string name="TMR_title">TMR - Maker For Cattle and Buffalo</string>
+    <string name="TMR_description">We are happy to introduce an Android application for making total
+        mixed ration for dairy cow and milch  buffalo . Please click the picture below and follow the
+        pages</string>
+
+    <string name="cow_title">CROSSBRED DIARY COW</string>
+    <string name="buffalo_title">MILCH BUFFALO</string>
+
+    <string name="BW">Body Weight (KG)</string>
+    <string-array name="BW_values">
+        <item>Select Body Weight</item>
+        <item>200</item>
+        <item>250</item>
+        <item>300</item>
+        <item>350</item>
+        <item>400</item>
+        <item>450</item>
+        <item>500</item>
+        <item>550</item>
+        <item>600</item>
+    </string-array>
+    <string name="MY">Milk Yield (KG)</string>
+    <string-array name="MY_values">
+        <item>Select Milk Yield</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+    </string-array>
+    <string name="MF">Milk Fat (KG)</string>
+    <string-array name="MF_values">
+        <item>Select Milk Fat</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+    <string name="P">Pregnant (M)</string>
+    <string-array name="P_values">
+        <item>Select status of pregnancy</item>
+        <item>0</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string name="DM">Dry Matter (KG)</string>
+    <string name="CP">CP (g)</string>
+    <string name="TDN">TDN (g)</string>
+
+    <string name="calculate">Calculate</string>
+    <string name="selectfeedlist">Select Feed List</string>
+
+    <string name="feed_name">Feed Name</string>
+    <string name="cost">Cost(\u20B9)</string>
+
+    <string name="weight">Weigth (KG)</string>
+    <string name="total">Total(\u20B9)</string>
 </resources>
