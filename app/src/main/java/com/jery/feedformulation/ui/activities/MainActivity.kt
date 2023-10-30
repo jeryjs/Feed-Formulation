@@ -2,10 +2,8 @@ package com.jery.feedformulation.ui.activities
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -25,6 +23,8 @@ class MainActivity : AppCompatActivity(), ChipNavigationBar.OnItemSelectedListen
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide();
+
         chpNavBar = findViewById(R.id.bottom_nav)!!
         chpNavBar.setOnItemSelectedListener(this)
         chpNavBar.setItemSelected(R.id.home, true)
@@ -38,13 +38,12 @@ class MainActivity : AppCompatActivity(), ChipNavigationBar.OnItemSelectedListen
         AppCompatDelegate.setDefaultNightMode(sharedPreferences.getInt("keyTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM))
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onItemSelected(id: Int) {
         var selectedFragment: Fragment? = null
         when (id) {
             R.id.home -> selectedFragment = HomeFragment()
             R.id.feeds -> selectedFragment = FeedsFragment()
-            R.id.info -> selectedFragment = InfoFragment()
+            R.id.info -> selectedFragment = NutrientFragment()
             R.id.more -> selectedFragment = MoreFragment()
         }
 //        chpNavBar.showBadge(id, id)

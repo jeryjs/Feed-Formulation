@@ -18,11 +18,11 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            applicationIdSuffix ".release8"
+            applicationIdSuffix ".release9"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            applicationIdSuffix ".debug8"
+            applicationIdSuffix ".debug9"
         }
     }
     applicationVariants.all { variant ->
@@ -54,4 +54,5 @@ dependencies {
     implementation 'com.nambimobile.widgets:expandable-fab:1.2.1'
 
     implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }

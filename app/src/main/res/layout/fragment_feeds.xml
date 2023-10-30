@@ -19,8 +19,10 @@
             android:clipToPadding="false" />
 
         <com.nambimobile.widgets.efab.ExpandableFabLayout
+            android:id="@+id/fabLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             app:efab_layout_fabOptionOpeningAnimationDurationMs="25"
             app:efab_layout_labelHiddenToVisibleAnimationDurationMs="75">
 

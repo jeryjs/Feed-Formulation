@@ -20,6 +20,7 @@ import com.jery.feedformulation.R
 import com.jery.feedformulation.data.Feed
 import com.jery.feedformulation.databinding.DialogAddNewFeedBinding
 import com.jery.feedformulation.databinding.FragmentFeedsBinding
+import com.jery.feedformulation.ui.activities.MainActivity
 import com.jery.feedformulation.ui.adapters.FeedAdapter
 import com.jery.feedformulation.utils.Utils
 import java.io.File
@@ -59,6 +60,7 @@ class FeedsFragment : Fragment() {
     ): View {
         binding = FragmentFeedsBinding.inflate(inflater, container, false)
 
+        if (activity is MainActivity) binding.fabLayout.visibility = View.VISIBLE
         binding.addNewFeedsFab.setOnClickListener { addNewFeed() }
         binding.exportFeedsFab.setOnClickListener { exportFeeds() }
         binding.importFeedsFab.setOnClickListener { importFeeds() }
@@ -229,5 +231,9 @@ class FeedsFragment : Fragment() {
 
     fun getSelectedFeeds(): List<Feed> {
         return feedAdapter.getFeeds().filter { it.checked }
+    }
+
+    fun getSelectedFeedsIndex(): List<Int> {
+        return getSelectedFeeds().map { feed -> feedAdapter.getFeeds().indexOf(feed) }
     }
 }

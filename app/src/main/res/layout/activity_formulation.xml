@@ -10,7 +10,10 @@
 
     <TextSwitcher
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:backgroundTint="#00000050">
 
         <TextView
             android:id="@+id/tvLog"
@@ -21,13 +24,13 @@
     </TextSwitcher>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_select_feeds"
+        android:id="@+id/fabNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
-        android:visibility="gone"
-        android:src="@drawable/ic_anim_info" />
+        android:rotation="270"
+        android:src="@drawable/anim_caret_down" />
 
 </RelativeLayout>

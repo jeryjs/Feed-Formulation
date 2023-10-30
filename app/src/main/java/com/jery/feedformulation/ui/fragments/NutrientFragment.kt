@@ -9,49 +9,61 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import com.jery.feedformulation.data.Nutrients
-import com.jery.feedformulation.databinding.FragmentInfoBinding
+import com.jery.feedformulation.databinding.FragmentNutrientBinding
 import com.jery.feedformulation.ui.activities.FeedsSelection
+import com.jery.feedformulation.ui.activities.MainActivity
 import kotlin.math.pow
 
 /**
  * A [Fragment] subclass to display the examples.
- * Use the [InfoFragment.newInstance] factory method to
+ * Use the [NutrientFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class InfoFragment : Fragment() {
-    private lateinit var _b: FragmentInfoBinding
+class NutrientFragment : Fragment() {
+    private lateinit var _b: FragmentNutrientBinding
+    private var nutrients = Nutrients.getInstance()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _b = FragmentInfoBinding.inflate(inflater, container, false)
+        _b = FragmentNutrientBinding.inflate(inflater, container, false)
 
+        nutrients = Nutrients.getInstance()
+
+        if (activity is MainActivity) {
+            _b.button.visibility = View.VISIBLE
+            _b.button2.visibility = View.VISIBLE
+            _b.textView2.visibility = View.VISIBLE
+        } else {
+            _b.button.visibility = View.GONE
+            _b.button2.visibility = View.GONE
+            _b.textView2.visibility = View.GONE
+        }
         _b.button.setOnClickListener {
+            nutrients.calculateNutrients()
             val intent = Intent(activity, FeedsSelection::class.java).setAction("selectFeeds")
-            intent.putExtra("IS_SELECT_FEEDS_ENABLED", true)
             startActivity(intent)
         }
         _b.button2.setOnClickListener {
-            val intent = Intent(activity, FeedsSelection::class.java).setAction("selectFeeds")
-            intent.putExtra("IS_SELECT_FEEDS_ENABLED", false)
+            val intent = Intent(activity, FeedsSelection::class.java)
             startActivity(intent)
         }
 
         _b.sprBW.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {calc()}
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {calc()}
         }
         _b.sprMY.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {calc()}
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {calc()}
         }
         _b.sprMF.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {calc()}
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {calc()}
         }
         _b.sprPr.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {calc()}
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {calc()}
         }
         return _b.root
     }
@@ -64,7 +76,7 @@ class InfoFragment : Fragment() {
 
         _b.linearLayout2.visibility = View.VISIBLE
 
-        val nutrients = Nutrients(bw, my, mf, pr)
+        nutrients = Nutrients(bw, my, mf, pr)
         Nutrients.setInstance(nutrients)
         val (dm, cp, tdn) = nutrients.calculateNutrients()
 

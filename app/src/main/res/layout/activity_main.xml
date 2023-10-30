@@ -8,7 +8,7 @@
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1" />
 
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_weight="0"
         app:cnb_iconSize="30dp"
         app:cnb_menuResource="@menu/bottom_nav" />
 
