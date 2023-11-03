@@ -51,9 +51,9 @@ class MainActivity : AppCompatActivity(), ChipNavigationBar.OnItemSelectedListen
 
         if (selectedFragment != null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, selectedFragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .addToBackStack(null)
+                .replace(R.id.fragmentContainer, selectedFragment)
+//                .addToBackStack(null)
                 .commit()
         }
     }

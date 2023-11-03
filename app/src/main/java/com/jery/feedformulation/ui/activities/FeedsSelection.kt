@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.jery.feedformulation.R
 import com.jery.feedformulation.databinding.ActivityFeedsSelectionBinding
 import com.jery.feedformulation.ui.fragments.FeedsFragment
-import com.jery.feedformulation.utils.Simplexx
+import com.jery.feedformulation.utils.Simplex
 
 class FeedsSelection : AppCompatActivity() {
     private lateinit var binding: ActivityFeedsSelectionBinding
@@ -36,7 +36,7 @@ class FeedsSelection : AppCompatActivity() {
             (binding.fabSelectFeeds.drawable as? Animatable)?.start()
             val selectedFeeds = feedsFragment.getSelectedFeeds()
 
-            val s = Simplexx()
+            val s = Simplex()
 //            s.solve(selectedFeeds)
 
             binding.fragmentContainer.visibility = View.GONE

@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.fragments.FeedsFragment">
+    tools:context=".ui.fragments.FeedsFragment"
+    tools:ignore="HardcodedText, UnusedAttribute, TextContrastCheck">
 
     <TextView
         android:layout_width="match_parent"
@@ -18,14 +19,32 @@
         android:typeface="monospace" />
 
 <!--    DETAILS     -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="Details"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="16sp"
-        android:typeface="monospace" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Details"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="16sp"
+            android:typeface="monospace" />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cbChecked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:layoutDirection="rtl"
+            android:text="Selected"
+            android:tooltipText="Should be selected by default?"
+            android:checked="true" />
+
+    </RelativeLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtName"
@@ -34,8 +53,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="16dp"
         android:hint="Name"
-        android:labelFor="@id/edtName"
-        app:helperText="Cost per KG">
+        android:labelFor="@id/edtName">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtName"
@@ -44,6 +62,8 @@
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
+
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtCost"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -51,7 +71,8 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="16dp"
         android:hint="Cost"
-        android:labelFor="@id/edtCost">
+        android:labelFor="@id/edtCost"
+        app:placeholderText="Cost per KG">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtCost"
@@ -76,7 +97,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="16dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -122,6 +144,36 @@
                 android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Ca (%)">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtCa"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal"
+                android:text="0.0" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Ph (%)">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtPh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal"
+                android:text="0.0" />
+        </com.google.android.material.textfield.TextInputLayout>
+
     </LinearLayout>
 
 <!--    CONSTRAINTS -->
@@ -136,26 +188,52 @@
         android:textSize="16sp"
         android:typeface="monospace" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:paddingHorizontal="16dp"
-        android:hint="Min. Quantity (%)">
+        android:baselineAligned="false">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtMinInclLvl"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_weight="1"
+            android:hint="Cow (%)"
+            app:placeholderText="Min. Quantity (%)">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtMinIncl1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Buffalo"
+            app:placeholderText="Min. Quantity (%)">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtMinIncl2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Type"
-        android:paddingHorizontal="16dp">
+        android:paddingHorizontal="16dp"
+        android:labelFor="@+id/sprType">
 
         <AutoCompleteTextView
             style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"

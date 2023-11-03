@@ -147,10 +147,8 @@
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="0dp"
-            android:layout_height="144dp"
-            android:layout_marginTop="50dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -159,7 +157,7 @@
             <TextView
                 android:id="@+id/txtDM"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingTop="20dp"
                 android:text="DM (KG)"
@@ -169,7 +167,7 @@
             <TextView
                 android:id="@+id/txtCP"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingTop="20dp"
                 android:text="CP (g)"
@@ -179,7 +177,7 @@
             <TextView
                 android:id="@+id/txtTDN"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingTop="20dp"
                 android:text="TDN (g)"

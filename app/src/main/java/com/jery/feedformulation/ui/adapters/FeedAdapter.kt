@@ -2,27 +2,36 @@ package com.jery.feedformulation.ui.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Animatable
+import android.net.Uri
+import android.text.Editable
 import android.text.InputType
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.ChangeBounds
 import androidx.transition.TransitionManager
 import com.google.gson.GsonBuilder
 import com.jery.feedformulation.R
 import com.jery.feedformulation.data.Feed
+import com.jery.feedformulation.databinding.DialogAddNewFeedBinding
 import com.jery.feedformulation.databinding.LayoutFeedItemBinding
 import com.jery.feedformulation.ui.fragments.FeedsFragment
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.lang.NullPointerException
+import com.jery.feedformulation.utils.Constants as c
 
 class FeedAdapter(
     private val feeds: MutableList<Feed>,
@@ -160,12 +169,11 @@ class FeedAdapter(
 
         fun showDeleteFeedDialog(feed: Feed) {
             AlertDialog.Builder(itemView.context)
-                .setTitle("Delete Feed")
-                .setMessage("Are you sure you want to delete this feed?")
-                .setPositiveButton("Delete") { _, _ ->
-                    deleteFeed(feed)
-                }
-                .setNegativeButton("Cancel", null)
+                .setTitle("Modify Feed")
+                .setMessage("How do you want to modify this feed?")
+                .setPositiveButton("Delete") { _, _ -> deleteFeed(feed) }
+                .setNegativeButton("Edit") { _, _ -> editFeed(feed) }
+                .setNeutralButton("Cancel", null)
                 .show()
         }
 
@@ -176,6 +184,65 @@ class FeedAdapter(
                 notifyItemRemoved(position)
                 saveUpdatedFeedsToJson()
                 Toast.makeText(itemView.context, "Feed deleted", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        private fun editFeed(feed: Feed) {
+            val ctx = itemView.context
+            val _v = DialogAddNewFeedBinding.inflate(LayoutInflater.from(ctx))
+
+            val detailsFields = listOf(_v.edtDM, _v.edtCP, _v.edtTDN, _v.edtCa, _v.edtPh)
+            val percentageFields = listOf(_v.edtMinIncl1, _v.edtMinIncl2)
+            val requiredFields = listOf(_v.edtName, _v.edtCost, _v.sprType, _v.edtDM, _v.edtCP, _v.edtTDN)
+
+            val typeArray = ctx.resources.getStringArray(R.array.type_array)
+            _v.sprType.setAdapter(ArrayAdapter(ctx, android.R.layout.simple_spinner_dropdown_item, typeArray))
+
+            // Populate fields with feed details
+            _v.apply {
+                edtName.setText(feed.name)
+                edtCost.setText(feed.cost.toString())
+                cbChecked.isChecked = feed.checked
+                detailsFields.forEachIndexed { i, it ->  it.setText(feed.details[i].toString()) }
+                percentageFields.forEachIndexed { i, it -> it.setText(feed.percentage[ctx.resources.getStringArray(R.array.cattle_array)[i]].toString()) }
+//                sprType.setSelection(typeArray.indexOf(feed.getCategoryText()))
+            }
+
+            val dialog = AlertDialog.Builder(ctx)
+                .setView(_v.root)
+                .setTitle("Edit Feed #${feed.id}")
+                .setPositiveButton("Save", null)
+                .setNegativeButton("Cancel", null)
+                .setNeutralButton("Help") { _, _ -> startActivity(ctx, Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?q=how+to+calculate+feed+nutrients")), null ) }
+                .setCancelable(false)
+                .show()
+
+            val saveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            saveButton.isEnabled = true // Enable by default
+
+            requiredFields.forEach { field ->
+                field.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                    override fun afterTextChanged(s: Editable?) {
+                        saveButton.isEnabled = requiredFields.all { it.text.isNotEmpty() }
+                    }
+                })
+            }
+
+            saveButton.setOnClickListener {
+                // Update feed data
+                feed.apply {
+                    name = _v.edtName.text.toString().trim()
+                    cost = _v.edtCost.text.toString().toDouble()
+                    type = _v.sprType.text.toString().substring(0, 1)
+                    details = listOf(_v.edtDM, _v.edtCP, _v.edtTDN, _v.edtCa, _v.edtPh).map { it.text.toString().toDouble() }
+                    percentage = mapOf(_v.edtMinIncl1, _v.edtMinIncl2).map {}
+                    checked = _v.cbChecked.isChecked
+                }
+                saveUpdatedFeedsToJson()
+                notifyItemChanged(bindingAdapterPosition)
+                dialog.dismiss()
             }
         }
 

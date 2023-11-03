@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.jery.feedformulation.R
@@ -27,6 +28,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import kotlin.properties.Delegates
+import com.jery.feedformulation.utils.Constants as c
 
 private const val EXPORT_FEEDS_REQUEST_CODE = 100
 private const val IMPORT_FEEDS_REQUEST_CODE = 101
@@ -47,7 +49,7 @@ class FeedsFragment : Fragment() {
         fun newInstance(isSelectFeedsEnabled: Boolean): FeedsFragment {
             val fragment = FeedsFragment()
             val args = Bundle()
-            args.putBoolean("IS_SELECT_FEEDS_ENABLED", isSelectFeedsEnabled)
+            args.putBoolean(c.IS_SELECT_FEEDS_ENABLED, isSelectFeedsEnabled)
             fragment.arguments = args
             return fragment
         }
@@ -72,7 +74,7 @@ class FeedsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         feedsFile = File(requireActivity().filesDir, "feeds.json")
-        IS_SELECT_FEEDS_ENABLED = arguments?.getBoolean("IS_SELECT_FEEDS_ENABLED") ?: false
+        IS_SELECT_FEEDS_ENABLED = arguments?.getBoolean(c.IS_SELECT_FEEDS_ENABLED) ?: false
 
         setupRecyclerView()
         initializeFeedsFile()
@@ -81,6 +83,7 @@ class FeedsFragment : Fragment() {
 
     private fun setupRecyclerView() {
         feedAdapter = FeedAdapter(mutableListOf(), feedsFile, this, IS_SELECT_FEEDS_ENABLED)
+        feedAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.ALLOW
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = feedAdapter
     }
@@ -127,7 +130,8 @@ class FeedsFragment : Fragment() {
         val saveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
         saveButton.isEnabled = false
 
-        val requiredFields = listOf(_v.edtName, _v.edtCost, _v.sprType, _v.edtDM, _v.edtCP, _v.edtTDN, _v.edtMinInclLvl)
+        val percentageFields = listOf(_v.edtMinIncl1, _v.edtMinIncl2)
+        val requiredFields = listOf(_v.edtName, _v.edtCost, _v.sprType, _v.edtDM, _v.edtCP, _v.edtTDN)
         requiredFields.forEach { field ->
             field.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -145,10 +149,10 @@ class FeedsFragment : Fragment() {
                 type = _v.sprType.text.toString().substring(0, 1),
                 details = listOf(_v.edtDM, _v.edtCP, _v.edtTDN).map { it.text.toString().toDouble() },
                 percentage = mapOf(
-                    "cow" to _v.edtMinInclLvl.text.toString().toDouble(),
-                    "buffalo" to _v.edtMinInclLvl.text.toString().toDouble()
+                    c.CATTLE_COW to _v.edtMinIncl1.text.toString().toDouble(),
+                    c.CATTLE_BUFFALO to _v.edtMinIncl2.text.toString().toDouble()
                 ),
-                checked = false,
+                checked = _v.cbChecked.isChecked,
                 id = feedAdapter.itemCount + 1
             )
             Feed.addNewFeed(newFeed, feedsFile)

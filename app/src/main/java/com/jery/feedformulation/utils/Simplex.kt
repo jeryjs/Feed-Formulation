@@ -6,7 +6,7 @@ import com.jery.feedformulation.data.Nutrients
 
 
 @Suppress("PropertyName", "PrivatePropertyName", "FunctionName", "LocalVariableName")
-class Simplexx internal constructor() {
+class Simplex internal constructor() {
     private lateinit var nutrients: Nutrients
     private lateinit var A: Array<Array<Double>>
     private lateinit var M: IntArray
@@ -18,7 +18,7 @@ class Simplexx internal constructor() {
     var total_tdn = 0.0
 
     // Entry point into the simplex solver
-    fun solve(feedsList: List<Int>) {
+    fun solve(feedsFeed: List<Feed>, feedsList: List<Int>) {
         feeds = feedsList
         println("Selected Feeds: $feeds")
         nutrients = Nutrients.getInstance()
@@ -30,10 +30,10 @@ class Simplexx internal constructor() {
         simplex()
         Result()
 
-        for (i in 0 until n) {
-            total_dm += FeedValues[i][0] * ans[i]!!
-            total_cp += FeedValues[i][1] * ans[i]!!
-            total_tdn += FeedValues[i][2] * ans[i]!!
+        for ((i, f) in feeds.withIndex()) {
+            total_dm += FeedValues[f][0] * ans[i]!!
+            total_cp += FeedValues[f][1] * ans[i]!!
+            total_tdn += FeedValues[f][2] * ans[i]!!
         }
     }
 
@@ -178,21 +178,22 @@ class Simplexx internal constructor() {
         }
         A = Array(m + 1) { Array(n + 1) { 0.0 } }
         for (i in 0 until m + 1) for (j in 0 until n + 1) A[i][j] = 0.0
-        for (i in 0 until n) {
-            A[0][i] = FeedValues[i][0]
-            A[1][i] = -1 * FeedValues[i][0]
+        for ((i, f) in feeds.withIndex()) {
+            A[0][i] = FeedValues[f][0]
+            A[1][i] = -1 * FeedValues[f][0]
         }
         A[0][n] = nutrients.dm * 100
         A[1][n] = -1 * nutrients.dm * 100
-        for (i in 0 until n) {
-            A[2][i] = FeedValues[i][1]
-            A[3][i] = -1 * FeedValues[i][1]
+        for ((i, f) in feeds.withIndex()) {
+            A[2][i] = FeedValues[f][1]
+            A[3][i] = -1 * FeedValues[f][1]
         }
         A[2][n] = nutrients.cp / 10 * 1.1
         A[3][n] = -1 * nutrients.cp / 10
-        for (i in 0 until n) {
-            A[4][i] = FeedValues[i][2]
-            A[5][i] = -1 * FeedValues[i][2]
+        for ((i, f) in feeds.withIndex()) {
+            println(FeedValues[f].toList())
+            A[4][i] = FeedValues[f][2]
+            A[5][i] = -1 * FeedValues[f][2]
         }
         A[4][n] = nutrients.tdn / 10 * 1.1
         A[5][n] = -1 * nutrients.tdn / 10
@@ -213,12 +214,12 @@ class Simplexx internal constructor() {
         A[7][n] = -1 * nutrients.dm * 0.4
         A[8][n] = nutrients.dm * 0.7
         A[9][n] = -1 * nutrients.dm * 0.2
-        for (i in 0 until n) {
+        for ((i, f) in feeds.withIndex()) {
             A[10 + i][i] = 1.0
-            A[10 + i][n] = percent[i] * nutrients.dm / 100
+            A[10 + i][n] = FeedValues[f][5] * nutrients.dm / 100
         }
-        for (i in 0 until n) {
-            A[m][i] = cost[i]
+        for ((i, f) in feeds.withIndex()) {
+            A[m][i] = cost[f]
         }
     }
 

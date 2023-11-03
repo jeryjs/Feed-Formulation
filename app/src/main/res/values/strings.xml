@@ -54,4 +54,10 @@
         <item>Concentrates</item>
         <item>Minerals</item>
     </string-array>
+
+    <string-array name="cattle_array">
+        <item>Cow</item>
+        <item>Buffalo</item>
+    </string-array>
+
 </resources>

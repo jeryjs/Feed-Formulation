@@ -36,17 +36,30 @@
             app:layout_constraintTop_toBottomOf="@id/title_textview" />
 
         <Button
-            android:id="@+id/start_button"
+            android:id="@+id/cow_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:paddingStart="32dp"
             android:paddingEnd="32dp"
-            android:text="START"
+            android:text="START (cow)"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/subtitle_textview" />
+
+        <Button
+            android:id="@+id/buffalo_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:text="START (buffalo)"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cow_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -15,6 +15,7 @@ import com.jery.feedformulation.ui.activities.MainActivity
  * create an instance of this fragment.
  */
 class MoreFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -12,16 +12,17 @@ import com.jery.feedformulation.data.Nutrients
 import com.jery.feedformulation.databinding.FragmentNutrientBinding
 import com.jery.feedformulation.ui.activities.FeedsSelection
 import com.jery.feedformulation.ui.activities.MainActivity
-import kotlin.math.pow
+import com.jery.feedformulation.utils.Constants as c
 
 /**
  * A [Fragment] subclass to display the examples.
  * Use the [NutrientFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class NutrientFragment : Fragment() {
+class NutrientFragment(private val cattle: String = c.CATTLE_COW) : Fragment() {
     private lateinit var _b: FragmentNutrientBinding
     private var nutrients = Nutrients.getInstance()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,11 +78,12 @@ class NutrientFragment : Fragment() {
         _b.linearLayout2.visibility = View.VISIBLE
 
         nutrients = Nutrients(bw, my, mf, pr)
+        nutrients.type = cattle
         Nutrients.setInstance(nutrients)
         val (dm, cp, tdn) = nutrients.calculateNutrients()
 
-        _b.txtDM.text = "DM (KG):        ${String.format("%.2f", dm)}"
-        _b.txtCP.text = "CP  (g):        ${String.format("%.2f", cp)}"
-        _b.txtTDN.text= "TDN (g):        ${String.format("%.2f", tdn)}"
+        _b.txtDM.text = "DM (KG):        ${String.format("%.2f", dm)}   to   ${String.format("%.2f", dm + 1.0)}"
+        _b.txtCP.text = "CP  (g):        ${String.format("%.2f", cp)}   to   ${String.format("%.2f", cp * 1.1)}"
+        _b.txtTDN.text= "TDN (g):        ${String.format("%.2f", tdn)}   to   ${String.format("%.2f", tdn * 1.1)}"
     }
 }

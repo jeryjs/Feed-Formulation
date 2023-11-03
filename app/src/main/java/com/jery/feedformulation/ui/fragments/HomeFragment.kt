@@ -5,12 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.jery.feedformulation.*
-import com.jery.feedformulation.ui.activities.FeedsSelection
+import com.jery.feedformulation.databinding.FragmentHomeBinding
 import com.jery.feedformulation.ui.activities.Formulation
+import com.jery.feedformulation.utils.Constants as c
 
 
 /**
@@ -23,20 +22,17 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
-        val btn = view.findViewById<Button>(R.id.start_button)
-        btn.setOnClickListener {
-//            val fragment = NutrientFragment()
-//            parentFragmentManager.beginTransaction()
-//                .replace(R.id.fragmentContainer, fragment)
-//                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-//                .addToBackStack(null)
-//                .commit()
-            val intent = Intent(activity, Formulation::class.java)
+    ): View {
+        val _b = FragmentHomeBinding.inflate(inflater, container, false)
+        _b.cowButton.setOnClickListener {
+            val intent = Intent(activity, Formulation::class.java).setAction(c.CATTLE_COW)
+            startActivity(intent)
+        }
+        _b.buffaloButton.setOnClickListener {
+            val intent = Intent(activity, Formulation::class.java).setAction(c.CATTLE_BUFFALO)
             startActivity(intent)
         }
 //        btn.performClick()
-        return view
+        return _b.root
     }
 }

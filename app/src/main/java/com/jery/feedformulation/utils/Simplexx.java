@@ -8,7 +8,7 @@ import com.jery.feedformulation.data.Nutrients;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Simplex {
+public class Simplexx {
 
     Nutrients nutirents;
     List<Feed> feeds;
