@@ -144,8 +144,8 @@ class FeedAdapter(
             if (position != RecyclerView.NO_POSITION) {
                 val feed = feeds[position]
                 feed.cost = newCost
+                saveFeedToJson(feed)
                 notifyItemChanged(position)
-                saveUpdatedFeedsToJson()
             }
         }
 
@@ -182,7 +182,10 @@ class FeedAdapter(
             if (position != -1) {
                 feeds.removeAt(position)
                 notifyItemRemoved(position)
-                saveUpdatedFeedsToJson()
+                val updatedFeeds = feeds.map { if (it.id == feed.id) feed else it }
+                val updatedFeedsJson = GsonBuilder().setPrettyPrinting().create().toJson(updatedFeeds)
+                try { FileOutputStream(feedsFile).use { outputStream -> outputStream.write(updatedFeedsJson.toByteArray()) }
+                } catch (e: IOException) { e.printStackTrace() }
                 Toast.makeText(itemView.context, "Feed deleted", Toast.LENGTH_SHORT).show()
             }
         }
@@ -193,10 +196,10 @@ class FeedAdapter(
 
             val detailsFields = listOf(_v.edtDM, _v.edtCP, _v.edtTDN, _v.edtCa, _v.edtPh)
             val percentageFields = listOf(_v.edtMinIncl1, _v.edtMinIncl2)
-            val requiredFields = listOf(_v.edtName, _v.edtCost, _v.sprType, _v.edtDM, _v.edtCP, _v.edtTDN)
+            val requiredFields = listOf(_v.edtName, _v.edtCost, _v.sprType) + detailsFields.take(3)
 
             val typeArray = ctx.resources.getStringArray(R.array.type_array)
-            _v.sprType.setAdapter(ArrayAdapter(ctx, android.R.layout.simple_spinner_dropdown_item, typeArray))
+            _v.sprType.setAdapter(ArrayAdapter.createFromResource(ctx, R.array.type_array, android.R.layout.simple_spinner_dropdown_item))
 
             // Populate fields with feed details
             _v.apply {
@@ -204,8 +207,8 @@ class FeedAdapter(
                 edtCost.setText(feed.cost.toString())
                 cbChecked.isChecked = feed.checked
                 detailsFields.forEachIndexed { i, it ->  it.setText(feed.details[i].toString()) }
-                percentageFields.forEachIndexed { i, it -> it.setText(feed.percentage[ctx.resources.getStringArray(R.array.cattle_array)[i]].toString()) }
-//                sprType.setSelection(typeArray.indexOf(feed.getCategoryText()))
+                percentageFields.forEachIndexed { i, it -> it.setText(feed.percentage[i].toString()) }
+                sprType.setText(feed.getCategoryText(), false)
             }
 
             val dialog = AlertDialog.Builder(ctx)
@@ -220,34 +223,36 @@ class FeedAdapter(
             val saveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
             saveButton.isEnabled = true // Enable by default
 
-            requiredFields.forEach { field ->
+            requiredFields+percentageFields.forEach { field ->
                 field.addTextChangedListener(object : TextWatcher {
                     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
                     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
                     override fun afterTextChanged(s: Editable?) {
-                        saveButton.isEnabled = requiredFields.all { it.text.isNotEmpty() }
+                        saveButton.isEnabled = requiredFields.all { it.text.isNotEmpty() } && percentageFields.any { it.text!!.isNotEmpty() }
                     }
                 })
             }
 
             saveButton.setOnClickListener {
                 // Update feed data
+                val position = feeds.indexOf(feed)
                 feed.apply {
                     name = _v.edtName.text.toString().trim()
                     cost = _v.edtCost.text.toString().toDouble()
                     type = _v.sprType.text.toString().substring(0, 1)
-                    details = listOf(_v.edtDM, _v.edtCP, _v.edtTDN, _v.edtCa, _v.edtPh).map { it.text.toString().toDouble() }
-                    percentage = mapOf(_v.edtMinIncl1, _v.edtMinIncl2).map {}
+                    details = detailsFields.map { if (it.text!!.isNotEmpty()) it.text.toString().toDouble() else 0.0 }
+                    percentage = percentageFields.map { if (it.text!!.isNotEmpty()) it.text.toString().toDouble() else 0.0 }
                     checked = _v.cbChecked.isChecked
                 }
-                saveUpdatedFeedsToJson()
-                notifyItemChanged(bindingAdapterPosition)
+                saveFeedToJson(feed)
+                notifyItemChanged(position)
                 dialog.dismiss()
             }
         }
 
-        private fun saveUpdatedFeedsToJson() {
-            val updatedFeedsJson = GsonBuilder().setPrettyPrinting().create().toJson(feeds)
+        private fun saveFeedToJson(feed: Feed) {
+            val updatedFeeds = feeds.map { if (it.id == feed.id) feed else it }
+            val updatedFeedsJson = GsonBuilder().setPrettyPrinting().create().toJson(updatedFeeds)
             try {
                 FileOutputStream(feedsFile).use { outputStream ->
                     outputStream.write(updatedFeedsJson.toByteArray())
@@ -256,6 +261,7 @@ class FeedAdapter(
                 e.printStackTrace()
             }
         }
+
 
         private fun corruptedFeedsList(context: Context) {
             AlertDialog.Builder(context)

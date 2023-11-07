@@ -11,7 +11,7 @@ data class Feed(
     var cost: Double,
     var type: String,
     var details: List<Double>,
-    var percentage: Map<Int, Double>,
+    var percentage: List<Double>,
     var checked: Boolean,
     val id: Int
 ) {

@@ -78,7 +78,7 @@ class NutrientFragment(private val cattle: String = c.CATTLE_COW) : Fragment() {
         _b.linearLayout2.visibility = View.VISIBLE
 
         nutrients = Nutrients(bw, my, mf, pr)
-        nutrients.type = cattle
+        nutrients.type = 0
         Nutrients.setInstance(nutrients)
         val (dm, cp, tdn) = nutrients.calculateNutrients()
 

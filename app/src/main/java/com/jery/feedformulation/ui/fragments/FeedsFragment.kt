@@ -148,10 +148,7 @@ class FeedsFragment : Fragment() {
                 cost = _v.edtCost.text.toString().toDouble(),
                 type = _v.sprType.text.toString().substring(0, 1),
                 details = listOf(_v.edtDM, _v.edtCP, _v.edtTDN).map { it.text.toString().toDouble() },
-                percentage = mapOf(
-                    c.CATTLE_COW to _v.edtMinIncl1.text.toString().toDouble(),
-                    c.CATTLE_BUFFALO to _v.edtMinIncl2.text.toString().toDouble()
-                ),
+                percentage = listOf(_v.edtMinIncl1, _v.edtMinIncl2).map { it.text.toString().toDouble() },
                 checked = _v.cbChecked.isChecked,
                 id = feedAdapter.itemCount + 1
             )

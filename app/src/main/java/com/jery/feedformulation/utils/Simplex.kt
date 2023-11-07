@@ -5,6 +5,8 @@ import com.jery.feedformulation.data.Feed
 import com.jery.feedformulation.data.Nutrients
 
 
+class NoSolutionFoundException(message: String?) : java.lang.Exception(message)
+
 @Suppress("PropertyName", "PrivatePropertyName", "FunctionName", "LocalVariableName")
 class Simplex internal constructor() {
     private lateinit var nutrients: Nutrients
@@ -16,14 +18,16 @@ class Simplex internal constructor() {
     var total_dm = 0.0
     var total_cp = 0.0
     var total_tdn = 0.0
+    private var count = 0
+    private var threshold = 2000
 
     // Entry point into the simplex solver
     fun solve(feedsFeed: List<Feed>, feedsList: List<Int>) {
-        feeds = feedsList
+        feeds = feedsFeed
         println("Selected Feeds: $feeds")
         nutrients = Nutrients.getInstance()
-//        FeedValues = feeds.map { feed -> feed.details }.toList()    // Converting to same format as FeedValues (Array<Array<Double>>)
-//        percent = feeds.map { feed -> feed.percentage["cow"]!! }.toTypedArray()     // Converting to same format as percent (Array<Double>)
+        FeedValues = feeds.map { feed -> feed.details }.toList()    // Converting to same format as FeedValues (Array<Array<Double>>)
+//        percent = feeds.map { feed -> feed.percentage[0]!! }.toTypedArray()     // Converting to same format as percent (Array<Double>)
         CreateEquations()
         Log.v("Nutrients", "${nutrients.dm} -- ${nutrients.cp} -- ${nutrients.tdn}")
 
@@ -31,9 +35,9 @@ class Simplex internal constructor() {
         Result()
 
         for ((i, f) in feeds.withIndex()) {
-            total_dm += FeedValues[f][0] * ans[i]!!
-            total_cp += FeedValues[f][1] * ans[i]!!
-            total_tdn += FeedValues[f][2] * ans[i]!!
+            total_dm += f.details[0] * ans[i]!!
+            total_cp += f.details[1] * ans[i]!!
+            total_tdn += f.details[2] * ans[i]!!
         }
     }
 
@@ -135,6 +139,8 @@ class Simplex internal constructor() {
     }
 
     private fun simplex() {
+        if (++count > threshold) throw Exception("No Solution Found! Please change the feeds selection.")
+        Log.d("Simplex", "count: $count")
         var c1 = 0
         var c2 = 0
         for (i in 0 until m) {
@@ -171,29 +177,30 @@ class Simplex internal constructor() {
     private fun CreateEquations() {
         n = feeds.size
         m = n + 10
-        M = IntArray(m + n)
         nutrients = Nutrients.getInstance()
-        for (i in 0 until m + n) {
-            M[i] = i
-        }
+
+        M = IntArray(m + n)
+        for (i in 0 until m + n) { M[i] = i }
+
         A = Array(m + 1) { Array(n + 1) { 0.0 } }
         for (i in 0 until m + 1) for (j in 0 until n + 1) A[i][j] = 0.0
+
         for ((i, f) in feeds.withIndex()) {
-            A[0][i] = FeedValues[f][0]
-            A[1][i] = -1 * FeedValues[f][0]
+            A[0][i] = f.details[0]
+            A[1][i] = -1 * f.details[0]
         }
         A[0][n] = nutrients.dm * 100
         A[1][n] = -1 * nutrients.dm * 100
         for ((i, f) in feeds.withIndex()) {
-            A[2][i] = FeedValues[f][1]
-            A[3][i] = -1 * FeedValues[f][1]
+            A[2][i] = f.details[1]
+            A[3][i] = -1 * f.details[1]
         }
         A[2][n] = nutrients.cp / 10 * 1.1
         A[3][n] = -1 * nutrients.cp / 10
         for ((i, f) in feeds.withIndex()) {
-            println(FeedValues[f].toList())
-            A[4][i] = FeedValues[f][2]
-            A[5][i] = -1 * FeedValues[f][2]
+            println(f.details.toList())
+            A[4][i] = f.details[2]
+            A[5][i] = -1 * f.details[2]
         }
         A[4][n] = nutrients.tdn / 10 * 1.1
         A[5][n] = -1 * nutrients.tdn / 10
@@ -214,46 +221,47 @@ class Simplex internal constructor() {
         A[7][n] = -1 * nutrients.dm * 0.4
         A[8][n] = nutrients.dm * 0.7
         A[9][n] = -1 * nutrients.dm * 0.2
+
         for ((i, f) in feeds.withIndex()) {
             A[10 + i][i] = 1.0
-            A[10 + i][n] = FeedValues[f][5] * nutrients.dm / 100
+            A[10 + i][n] = f.percentage[nutrients.type] * nutrients.dm / 100
         }
         for ((i, f) in feeds.withIndex()) {
-            A[m][i] = cost[f]
+            A[m][i] = f.cost
         }
     }
 
     companion object {
-        private lateinit var feeds: List<Int>
-//        var FeedValues: List<List<Double>> = mutableListOf()
-//        var percent: Array<Double> = emptyArray()
-        var FeedValues = arrayOf(
-            arrayOf(20.0, 8.0, 52.0, 0.38, 0.36, 40.0),
-            arrayOf(90.0, 7.0, 50.0, 0.3, 0.25, 10.0),
-            arrayOf(20.0, 8.0, 60.0, 0.53, 0.14, 40.0),
-            arrayOf(20.0, 15.8, 60.0, 1.44, 0.14, 10.0),
-            arrayOf(90.0, 3.5, 40.0, 0.18, 0.08, 20.0),
-            arrayOf(90.0, 6.0, 42.0, 0.15, 0.09, 10.0),
-            arrayOf(90.0, 3.3, 42.0, 0.3, 0.06, 10.0),
-            arrayOf(90.0, 3.0, 42.0, 0.53, 0.14, 40.0),
-            arrayOf(90.0, 8.1, 79.2, 0.53, 0.41, 10.0),
-            arrayOf(90.0, 42.0, 70.0, 0.36, 1.0, 10.0),
-            arrayOf(90.0, 22.0, 70.0, 0.2, 0.9, 10.0),
-            arrayOf(90.0, 32.0, 70.0, 0.31, 0.72, 10.0),
-            arrayOf(75.0, 12.0, 70.0, 1.067, 0.093, 10.0),
-            arrayOf(90.0, 17.0, 70.0, 0.28, 0.54, 10.0),
-            arrayOf(90.0, 16.0, 110.0, 0.3, 0.62, 10.0),
-            arrayOf(90.0, 18.0, 45.0, 0.3, 0.62, 10.0),
-            arrayOf(90.0, 22.0, 70.0, 0.5, 0.45, 10.0),
-            arrayOf(90.0, 20.0, 65.0, 0.5, 0.4, 10.0),
-            arrayOf(92.3, 50.0, 77.0, 0.29, 0.68, 10.0),
-            arrayOf(90.0, 0.0, 0.0, 32.0, 15.0, 0.1),
-            arrayOf(90.0, 0.0, 0.0, 0.0, 0.0, 0.1)
-        )
-        var percent = arrayOf(40.0,10.0,40.0,10.0,20.0,10.0,10.0,40.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,0.1,0.1)
-        var cost = doubleArrayOf(
-            3.0, 3.0, 3.0, 2.0, 3.0, 3.5, 2.0, 3.0, 17.0, 38.0, 23.0, 23.0, 17.0, 14.0, 21.0, 20.0,
-            17.0, 15.0, 15.0, 60.0, 5.0
-        )
+        private lateinit var feeds: List<Feed>
+        var FeedValues: List<List<Double>> = mutableListOf()
+        var percent: Array<Double> = emptyArray()
+//        var FeedValues = arrayOf(
+//            arrayOf(20.0, 8.0, 52.0, 0.38, 0.36, 40.0),
+//            arrayOf(90.0, 7.0, 50.0, 0.3, 0.25, 10.0),
+//            arrayOf(20.0, 8.0, 60.0, 0.53, 0.14, 40.0),
+//            arrayOf(20.0, 15.8, 60.0, 1.44, 0.14, 10.0),
+//            arrayOf(90.0, 3.5, 40.0, 0.18, 0.08, 20.0),
+//            arrayOf(90.0, 6.0, 42.0, 0.15, 0.09, 10.0),
+//            arrayOf(90.0, 3.3, 42.0, 0.3, 0.06, 10.0),
+//            arrayOf(90.0, 3.0, 42.0, 0.53, 0.14, 40.0),
+//            arrayOf(90.0, 8.1, 79.2, 0.53, 0.41, 10.0),
+//            arrayOf(90.0, 42.0, 70.0, 0.36, 1.0, 10.0),
+//            arrayOf(90.0, 22.0, 70.0, 0.2, 0.9, 10.0),
+//            arrayOf(90.0, 32.0, 70.0, 0.31, 0.72, 10.0),
+//            arrayOf(75.0, 12.0, 70.0, 1.067, 0.093, 10.0),
+//            arrayOf(90.0, 17.0, 70.0, 0.28, 0.54, 10.0),
+//            arrayOf(90.0, 16.0, 110.0, 0.3, 0.62, 10.0),
+//            arrayOf(90.0, 18.0, 45.0, 0.3, 0.62, 10.0),
+//            arrayOf(90.0, 22.0, 70.0, 0.5, 0.45, 10.0),
+//            arrayOf(90.0, 20.0, 65.0, 0.5, 0.4, 10.0),
+//            arrayOf(92.3, 50.0, 77.0, 0.29, 0.68, 10.0),
+//            arrayOf(90.0, 0.0, 0.0, 32.0, 15.0, 0.1),
+//            arrayOf(90.0, 0.0, 0.0, 0.0, 0.0, 0.1)
+//        )
+//        var percent = arrayOf(40.0,10.0,40.0,10.0,20.0,10.0,10.0,40.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,0.1,0.1)
+//        var cost = doubleArrayOf(
+//            3.0, 3.0, 3.0, 2.0, 3.0, 3.5, 2.0, 3.0, 17.0, 38.0, 23.0, 23.0, 17.0, 14.0, 21.0, 20.0,
+//            17.0, 15.0, 15.0, 60.0, 5.0
+//        )
     }
 }
