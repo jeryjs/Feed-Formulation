@@ -25,37 +25,60 @@ import com.google.gson.GsonBuilder
 import com.jery.feedformulation.R
 import com.jery.feedformulation.data.Feed
 import com.jery.feedformulation.databinding.DialogAddNewFeedBinding
-import com.jery.feedformulation.databinding.LayoutFeedItemBinding
-import com.jery.feedformulation.ui.fragments.FeedsFragment
+import com.jery.feedformulation.databinding.ItemCategoryBinding
+import com.jery.feedformulation.databinding.ItemFeedBinding
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.lang.NullPointerException
-import com.jery.feedformulation.utils.Constants as c
+
+private const val VIEW_TYPE_CATEGORY = 0
+private const val VIEW_TYPE_FEED = 1
 
 class FeedAdapter(
     private val feeds: MutableList<Feed>,
     private val feedsFile: File,
-    private val feedsFragment: FeedsFragment,
     private val IS_SELECT_FEEDS_ENABLED: Boolean
-) : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private lateinit var catIndex: IntArray // category index
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_feed_item, parent, false)
-        return FeedViewHolder(view, feedsFragment)
+    override fun getItemCount(): Int {
+        catIndex = feeds.map { it.type }.distinct().mapIndexed { index, type ->
+            feeds.indexOfFirst { it.type == type } + index
+        }.toIntArray()
+        return feeds.size + catIndex.size
     }
 
-    override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
-        val feed = feeds[position]
-        holder.bind(feed)
-        holder.itemView.setOnLongClickListener {
-            holder.showDeleteFeedDialog(feed)
-            true
+    override fun getItemViewType(position: Int): Int {
+        return if (catIndex.contains(position)) VIEW_TYPE_CATEGORY else VIEW_TYPE_FEED
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return when (viewType) {
+            VIEW_TYPE_CATEGORY -> CategoryViewHolder(ItemCategoryBinding.inflate(inflater, parent, false))
+            VIEW_TYPE_FEED -> FeedViewHolder(ItemFeedBinding.inflate(inflater, parent, false))
+            else -> throw IllegalArgumentException("Unknown view type: $viewType")
         }
     }
 
-    override fun getItemCount() = feeds.size
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (holder) {
+            is FeedViewHolder -> {
+                holder.bind(getFeedItem(position))
+                holder.itemView.setOnLongClickListener {
+                    holder.showDeleteFeedDialog(getFeedItem(position))
+                    true
+                }
+            }
+            is CategoryViewHolder -> holder.bind(getFeedItem(position + 1).getCategoryText())
+        }
+    }
+
+    private fun getFeedItem(position: Int): Feed {
+        val index = catIndex.indexOfFirst { it >= position }
+        return if (index != -1) feeds[position - index] else feeds[position - catIndex.size]
+    }
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateFeeds(updatedFeeds: List<Feed>) {
@@ -68,52 +91,45 @@ class FeedAdapter(
         return feeds
     }
 
-    inner class FeedViewHolder(itemView: View, private val _FF: FeedsFragment) : RecyclerView.ViewHolder(itemView) {
-        private val feedBinding = LayoutFeedItemBinding.bind(itemView)
+    inner class CategoryViewHolder(private val binding: ItemCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(category: String) {
+            binding.categoryTextView.text = category
+        }
+    }
+
+    inner class FeedViewHolder(private val binding: ItemFeedBinding) : RecyclerView.ViewHolder(binding.root) {
         private var isExpanded: Boolean = false
 
         fun bind(feed: Feed) {
             setFeedSelection(feed)
-            updateCategoryTextView(feed)
             updateFeedDetails(feed)
             enableCostEditing(feed)
         }
 
         private fun setFeedSelection(feed: Feed) {
             if (IS_SELECT_FEEDS_ENABLED) {
-                feedBinding.checkBox.visibility = View.VISIBLE
-                feedBinding.checkBox.isChecked = feed.checked
+                binding.checkBox.visibility = View.VISIBLE
+                binding.checkBox.isChecked = feed.checked
                 itemView.setOnClickListener {selectFeed(feed)}
             } else {
-                feedBinding.imageView.visibility = View.VISIBLE
+                binding.imageView.visibility = View.VISIBLE
                 itemView.setOnClickListener {expandFeed()}
-            }
-        }
-
-        private fun updateCategoryTextView(feed: Feed) {
-            val category = feed.getCategoryText()
-            val bap = bindingAdapterPosition
-            if (bap == 0 || feeds[bap - 1].type != feeds[bap].type) {
-                feedBinding.categoryTextView.visibility = View.VISIBLE
-                feedBinding.categoryTextView.text = category
-            } else {
-                feedBinding.categoryTextView.visibility = View.GONE
             }
         }
 
         private fun updateFeedDetails(feed: Feed) {
             try {
-                feedBinding.feedNameTextView.text = feed.name
-                feedBinding.feedCostTextView.text = "₹ ${feed.cost}"
+                binding.feedNameTextView.text = feed.name
+                binding.feedCostTextView.text = "₹ ${feed.cost}"
                 val detailsText = "DM: ${feed.details[0]}% \t CP: ${feed.details[1]}% \t TDN: ${feed.details[2]}% \n CA: ${feed.details[3]}% \t PH: ${feed.details[4]}% \t PER: ${feed.percentage}%"
-                feedBinding.detailsTextView.text = detailsText
+                binding.detailsTextView.text = detailsText
             } catch (e: NullPointerException) {
                 corruptedFeedsList(itemView.context)
             }
         }
 
         private fun enableCostEditing(feed: Feed) {
-            feedBinding.feedCostTextView.setOnClickListener {
+            binding.feedCostTextView.setOnClickListener {
                 showCostEditDialog(feed)
             }
         }
@@ -152,19 +168,19 @@ class FeedAdapter(
         private fun expandFeed() {
             isExpanded = !isExpanded
             TransitionManager.beginDelayedTransition(itemView.parent as ViewGroup, ChangeBounds())
-            (feedBinding.imageView.drawable as? Animatable)?.start()
+            (binding.imageView.drawable as? Animatable)?.start()
             if (isExpanded) {
-                feedBinding.detailsLayout.visibility = View.VISIBLE
-                feedBinding.imageView.rotation = 180F
+                binding.detailsLayout.visibility = View.VISIBLE
+                binding.imageView.rotation = 180F
             } else {
-                feedBinding.detailsLayout.visibility = View.GONE
-                feedBinding.imageView.rotation = 0F
+                binding.detailsLayout.visibility = View.GONE
+                binding.imageView.rotation = 0F
             }
         }
 
         private fun selectFeed(feed: Feed) {
-            feedBinding.checkBox.isChecked = (!feedBinding.checkBox.isChecked)
-            feed.checked = feedBinding.checkBox.isChecked
+            binding.checkBox.isChecked = (!binding.checkBox.isChecked)
+            feed.checked = binding.checkBox.isChecked
         }
 
         fun showDeleteFeedDialog(feed: Feed) {
@@ -198,7 +214,6 @@ class FeedAdapter(
             val percentageFields = listOf(_v.edtMinIncl1, _v.edtMinIncl2)
             val requiredFields = listOf(_v.edtName, _v.edtCost, _v.sprType) + detailsFields.take(3)
 
-            val typeArray = ctx.resources.getStringArray(R.array.type_array)
             _v.sprType.setAdapter(ArrayAdapter.createFromResource(ctx, R.array.type_array, android.R.layout.simple_spinner_dropdown_item))
 
             // Populate fields with feed details
@@ -245,7 +260,7 @@ class FeedAdapter(
                     checked = _v.cbChecked.isChecked
                 }
                 saveFeedToJson(feed)
-                notifyItemChanged(position)
+                notifyDataSetChanged()
                 dialog.dismiss()
             }
         }

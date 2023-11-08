@@ -8,16 +8,6 @@
     android:paddingStart="2dp"
     android:paddingEnd="2dp">
 
-    <TextView
-        android:id="@+id/categoryTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:paddingBottom="8dp"
-        android:textAppearance="?android:textAppearanceMedium"
-        tools:text="Empty Category"
-        tools:visibility="visible" />
-
     <LinearLayout
         android:id="@+id/feedItemLayout"
         android:layout_width="match_parent"
@@ -34,8 +24,9 @@
             android:layout_height="wrap_content"
             android:importantForAccessibility="no"
             android:visibility="gone"
-            tools:visibility="visible"
-            app:srcCompat="@drawable/anim_caret_down" />
+            app:srcCompat="@drawable/anim_caret_down"
+            app:tint="?android:attr/textColorPrimary"
+            tools:visibility="visible" />
 
         <CheckBox
             android:id="@+id/checkBox"

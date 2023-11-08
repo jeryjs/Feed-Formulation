@@ -82,7 +82,7 @@ class FeedsFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        feedAdapter = FeedAdapter(mutableListOf(), feedsFile, this, IS_SELECT_FEEDS_ENABLED)
+        feedAdapter = FeedAdapter(mutableListOf(), feedsFile, IS_SELECT_FEEDS_ENABLED)
         feedAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.ALLOW
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = feedAdapter
