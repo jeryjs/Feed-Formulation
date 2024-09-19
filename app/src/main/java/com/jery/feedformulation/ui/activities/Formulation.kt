@@ -30,7 +30,7 @@ class Formulation : AppCompatActivity() {
                 is FeedsFragment -> {
                     (_b.fabNext.drawable as? Animatable)?.start()
                     _b.fabNext.rotation += 180f
-                    showResultFragment(feedsFragment.getSelectedFeeds(), feedsFragment.getSelectedFeedsIndex())
+                    showResultFragment(feedsFragment.getSelectedFeeds())
                     supportActionBar?.title = "Result"
                 }
                 is ResultFragment ->{
@@ -66,10 +66,10 @@ class Formulation : AppCompatActivity() {
             .commit()
     }
 
-    private fun showResultFragment(feedsList: List<Feed>, feedsId: List<Int>) {
+    private fun showResultFragment(feedsList: List<Feed>) {
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
-            .replace(R.id.fragment_container, ResultFragment(feedsList, feedsId))
+            .replace(R.id.fragment_container, ResultFragment(feedsList))
             .addToBackStack(null)
             .commit()
     }

@@ -16,7 +16,7 @@ import com.jery.feedformulation.utils.Simplex
  * Use the [ResultFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ResultFragment(private val selectedFeeds: List<Feed>, private val selectedFeedsIndex: List<Int>) : Fragment() {
+class ResultFragment(private val selectedFeeds: List<Feed>) : Fragment() {
     private lateinit var _b: FragmentResultBinding
 
     override fun onCreateView(
@@ -37,7 +37,7 @@ class ResultFragment(private val selectedFeeds: List<Feed>, private val selected
 
         try {
             val s = Simplex()
-            s.solve(selectedFeeds, selectedFeedsIndex)
+            s.solve(selectedFeeds)
 
             string += "Total DM:\t\t${"%.2f".format(s.total_dm)}\n"
             string += "Total CP:\t\t${"%.2f".format(s.total_cp)}\n"
@@ -46,7 +46,7 @@ class ResultFragment(private val selectedFeeds: List<Feed>, private val selected
             val weights = mutableListOf<Double>()
             string += "\n\nRESULT: [${s.ans.size}]\n\n"
             for ((i, feed) in selectedFeeds.withIndex()) {
-                val weight = (s.ans[i]!! * 100.0) / 100.0
+                val weight = (s.ans[i] * 100.0) / 100.0
                 weights.add(weight)
                 string += if (weight > 0)
                     "${feed.name}:\t${"%.2f".format(weight)} Kg\n"

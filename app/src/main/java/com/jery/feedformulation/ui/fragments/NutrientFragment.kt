@@ -50,22 +50,14 @@ class NutrientFragment(private val cattle: String = c.CATTLE_COW) : Fragment() {
             startActivity(intent)
         }
 
-        _b.sprBW.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {calc()}
+        listOf(_b.sprBW, _b.sprMY, _b.sprMF, _b.sprPr).forEachIndexed { i, it ->
+            it.setSelection(listOf(4, 7, 1, 0)[i])
+            it.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>) {calc()}
+                override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {calc()}
+            }
         }
-        _b.sprMY.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {calc()}
-        }
-        _b.sprMF.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {calc()}
-        }
-        _b.sprPr.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {calc()}
-        }
+
         return _b.root
     }
     @SuppressLint("SetTextI18n")

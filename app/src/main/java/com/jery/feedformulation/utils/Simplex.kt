@@ -1,143 +1,199 @@
+@file:Suppress("KDocUnresolvedReference", "PropertyName", "PrivatePropertyName", "LocalVariableName")
+
 package com.jery.feedformulation.utils
 
 import android.util.Log
 import com.jery.feedformulation.data.Feed
 import com.jery.feedformulation.data.Nutrients
 
-
-class NoSolutionFoundException(message: String?) : java.lang.Exception(message)
-
-@Suppress("PropertyName", "PrivatePropertyName", "FunctionName", "LocalVariableName")
 class Simplex internal constructor() {
     private lateinit var nutrients: Nutrients
     private lateinit var A: Array<Array<Double>>
     private lateinit var M: IntArray
     private var m = 0
     private var n = 0
-    lateinit var ans: Array<Double?>
+    lateinit var ans: Array<Double>
     var total_dm = 0.0
     var total_cp = 0.0
     var total_tdn = 0.0
     private var count = 0
     private var threshold = 2000
 
-    // Entry point into the simplex solver
-    fun solve(feedsFeed: List<Feed>, feedsList: List<Int>) {
-        feeds = feedsFeed
-        println("Selected Feeds: $feeds")
-        nutrients = Nutrients.getInstance()
-        FeedValues = feeds.map { feed -> feed.details }.toList()    // Converting to same format as FeedValues (Array<Array<Double>>)
-//        percent = feeds.map { feed -> feed.percentage[0]!! }.toTypedArray()     // Converting to same format as percent (Array<Double>)
-        CreateEquations()
-        Log.v("Nutrients", "${nutrients.dm} -- ${nutrients.cp} -- ${nutrients.tdn}")
+    /**
+     * This function solves a linear programming problem using the simplex method.
+     * It takes a list of Feed objects as input and uses them to create equations, solve them using the simplex method,
+     * and print the results. It also calculates and prints the total dry matter, crude protein, and total digestible nutrients
+     * for the feeds used in the problem.
+     *
+     * @param feedsList The list of Feed objects to use in the problem.
+     *
+     * The function uses the following variables:
+     * - [feeds]: A list of Feed objects used in the problem.
+     * - [n]: The number of feeds used in the problem.
+     * - [ans]: An array of doubles representing the solution to the problem.
+     * - [total_dm]: The total dry matter for the feeds used in the problem.
+     * - [total_cp]: The total crude protein for the feeds used in the problem.
+     * - [total_tdn]: The total digestible nutrients for the feeds used in the problem.
+     * - [y]: A boolean variable used to track if the current feed is the one with the highest dry matter percentage.
+     * - [D]: A double variable used to store the highest dry matter percentage.
+     * - [P]: A boolean variable used to track if the current feed is the one with the highest protein percentage.
+     * - [k]: A double variable used to store the highest protein percentage.
+     */
+    fun solve(feedsList: List<Feed>) {
+        feeds = feedsList
 
+        createEquations()
         simplex()
-        Result()
+        result()
 
-        for ((i, f) in feeds.withIndex()) {
-            total_dm += f.details[0] * ans[i]!!
-            total_cp += f.details[1] * ans[i]!!
-            total_tdn += f.details[2] * ans[i]!!
+        var y = false; var D = 0.0; var P = false; var k = 0.0
+        for (i in 0 until n) {
+            total_cp += (feeds[i].details[1] * ans[i])
+            total_tdn += (feeds[i].details[2] * ans[i])
+            println("${feeds[i].details[0]}, $i, ${feeds[i].percentage}, ${ans[i]}")
+            ans[i] = (100 * ans[i]) / feeds[i].details[0]
+
+            if (i == 16) {
+                y = true
+                D = ans[i]
+            }
+            if (i == 17) {
+                P = true
+                k = ans[i]
+            }
+            if (i == 19) {
+                if (y) ans[i] = ans[i] - 0.01 * D
+                if (P) ans[i] = ans[i] - 0.01 * k
+            }
+
+            total_dm += (feeds[i].details[0] * ans[i])
+        }
+
+        total_dm /= 100
+        total_cp *= 10
+        total_tdn *= 10
+    }
+
+    /**
+     * Creates the equations for the simplex algorithm.
+     * This function takes in the necessary inputs from global vars and generates the
+     * equations required for the simplex algorithm to solve the linear programming problem.
+     * The equations are stored in a matrix format for further processing.
+     * - [n]: the number of variables (feeds selected)
+     * - [m]: the number of constraints applied to the linear programmnig problem
+     * - [M]: an integer array used to keep track of the indices of the basic and non-basic variables in the simplex algorithm.
+     * - [A]: a matrix representing the coefficients of the constraints
+     */
+    private fun createEquations() {
+        n = feeds.size
+        m = 15
+
+        nutrients = Nutrients.getInstance()
+        println("nutrients: ${nutrients.dm}, ${nutrients.cp}, ${nutrients.tdn}")
+
+        M = IntArray(m + n)
+        for (i in 0 until m + n) {
+            M[i] = i
+        }
+
+        A = Array(m + 1) { Array(n + 1) { 0.0 } }
+
+        for (i in 0 until n) {
+            A[0][i] = 1.0
+            A[1][i] = -1.0
+        }
+        A[0][n] = 1.1 * nutrients.dm
+        A[1][n] = (-1 * nutrients.dm) * 0.85
+
+        for (i in 0 until n) {
+            A[2][i] = feeds[i].details[1]
+            A[3][i] = -1 * feeds[i].details[1]
+        }
+        A[2][n] = nutrients.cp / 10 * 1.1
+        A[3][n] = ((-1 * nutrients.cp) / 10) * 0.9
+
+        for (i in 0 until n) {
+            A[4][i] = feeds[i].details[2]
+            A[5][i] = -1 * feeds[i].details[2]
+        }
+        A[4][n] = nutrients.tdn / 10 * 1.1
+        A[5][n] = ((-1 * nutrients.tdn) / 10) * 0.95
+
+        for (i in 0 until n) {
+            if (i in 0 until 4) {
+                A[6][i] = 0.3
+                A[7][i] = -0.3
+            }
+            if (i in 4 until 8) {
+                A[6][i] = -0.4
+                A[7][i] = 0.4
+            }
+            else {
+                A[6][i] = 0.0
+                A[7][i] = 0.0
+            }
+        }
+        A[6][n] = 0.0
+        A[7][n] = 0.0
+
+        for (i in 0 until n) {
+            if (i in 8 until 19) {
+                A[8][i] = 1.0
+                A[9][i] = -1.0
+            } else {
+                A[8][i] = 0.0
+                A[9][i] = 0.0
+            }
+        }
+        A[8][n] = 0.6 * nutrients.dm
+        A[9][n] = -0.4 * nutrients.dm
+
+        for (i in 0 until n) {
+            if (i == 19) {
+                A[10][i] = 1.0
+                A[11][i] = -1.0
+            } else {
+                A[10][i] = 0.0
+                A[11][i] = 0.0
+            }
+        }
+        A[10][n] = 0.0125 * nutrients.dm
+        A[11][n] = -0.01 * nutrients.dm
+
+        for (i in 0 until n) {
+            if (i == 20) {
+                A[12][i] = 1.0
+                A[13][i] = -1.0
+            } else {
+                A[12][i] = 0.0
+                A[13][i] = 0.0
+            }
+        }
+        A[12][n] = 0.0075 * nutrients.dm;
+        A[13][n] = -0.005 * nutrients.dm;
+
+        for (i in 0 until n) {
+            A[14][i] = if (i == 3) 1.0 else 0.0
+        }
+        A[14][n] = nutrients.dm / 100
+
+        for (i in 0 until n) {
+            A[15][i] = feeds[i].cost
         }
     }
 
-    private fun Operate(a: Int, b: Int) {
-        var p = 0.0
-        val B = Array(m + 1) { Array(n + 1) { 0.0 } }
-        for (i in 0 until m + 1) for (j in 0 until n + 1) B[i][j] = A[i][j]
-        p = B[a][b]
-        A[a][b] = 1 / p
-        for (i in 0 until m + 1) {
-            if (i != a) {
-                A[i][b] = -1 * B[i][b] / p
-            }
-        }
-        for (j in 0 until n + 1) {
-            if (j != b) {
-                A[a][j] = B[a][j] / p
-            }
-        }
-        for (i in 0 until m + 1) {
-            for (j in 0 until n + 1) {
-                if (i != a && j != b) {
-                    A[i][j] = (B[a][b] * B[i][j] - B[a][j] * B[i][b]) / p
-                }
-            }
-        }
-    }
-
-    private fun Primal(im: Int): Double {
-        var J = n
-        var I = 0
-        var min = 0.0
-        var PI = 0.0
-        for (j in 0 until n) {
-            if (A[m][j] < min) {
-                min = A[m][j]
-                J = j
-            }
-        }
-        var sum = -1.0
-        var ratio = 0.0
-        for (i in 0 until m) {
-            if (A[i][J] > 0) {
-                ratio = A[i][n] / A[i][J]
-                if (sum == -1.0 || sum > ratio) {
-                    sum = ratio
-                    I = i
-                }
-            }
-        }
-        if (im == 1) {
-            PI = A[I][n] * A[m][J] / A[I][J]
-            if (PI < 0) {
-                PI *= -1.0
-            }
-            return PI
-        }
-        Operate(I, J)
-        val temp = M[I + n]
-        M[I + n] = M[J]
-        M[J] = temp
-        return 0.0
-    }
-
-    private fun Dual(im: Int): Double {
-        var I = m
-        var J = 0
-        var min = 0.0
-        var DI = 0.0
-        for (i in 0 until m) {
-            if (A[i][n] < min) {
-                min = A[i][n]
-                I = i
-            }
-        }
-        var sum = -1.0
-        var ratio = 0.0
-        for (j in 0 until n) {
-            if (A[I][j] < 0) {
-                ratio = A[m][j] / A[I][j]
-                if (sum == -1.0 || sum > ratio) {
-                    sum = ratio
-                    J = j
-                }
-            }
-        }
-        if (im == 1) {
-            DI = A[I][n] * A[m][J] / A[I][J]
-            if (DI < 0) {
-                DI *= -1.0
-            }
-            return DI
-        }
-        Operate(I, J)
-        val temp = M[I + n]
-        M[I + n] = M[J]
-        M[J] = temp
-        return 0.0
-    }
-
+    /**
+     * This function implements the simplex algorithm to solve linear programming problems.
+     * It iteratively solves the problem by either using the primal or dual method, depending on the problem's constraints.
+     * The function stops when the optimal solution is found or when it is determined that the problem is unbounded.
+     * @throws Exception if the number of iterations exceeds the threshold.
+     *
+     * - [count] and threshold: Counts the number of Simplex algorithm iterations and throws Exception if it exceeds the threshold.
+     * - [c1] and c2: Check for negative values in the last column and row of matrix A, respectively.
+     * - [PI] and DI: Indicators calculated to decide the next step in the Simplex method.
+     * - [A]: A matrix holding coefficients of the constraints and objective function.
+     * - [m] and n: Represent the number of constraints and variables in the problem, respectively.
+     */
     private fun simplex() {
         if (++count > threshold) throw Exception("No Solution Found! Please change the feeds selection.")
         Log.d("Simplex", "count: $count")
@@ -148,86 +204,194 @@ class Simplex internal constructor() {
                 c1 = 1
             }
         }
+
         for (i in 0 until n) {
             if (A[m][i] < 0) {
                 c2 = 1
             }
         }
-        if (c1 == 0 && c2 == 0) return
-        else if (c1 == 0) Primal(0)
-        else if (c2 == 0) Dual(0)
+
+        if (c1 == 0 && c2 == 0)
+            return
+        else if (c1 == 0)
+            primal(0)
+        else if (c2 == 0)
+            dual(0)
         else {
-            val PI = Primal(1)
-            val DI = Dual(1)
-            if (PI >= DI) Primal(0) else Dual(0)
+            val PI = primal(1)  // Primal Indicator
+            val DI = dual(1)    // Dual Indicatior
+            if (PI >= DI)
+                primal(0)
+            else
+                dual(0)
         }
         simplex()
     }
 
-    private fun Result() {
-        ans = arrayOfNulls(n)
-        for (i in 0 until n) ans[i] = 0.0
+    /**
+     * This function implements the primal simplex algorithm to solve linear programming problems.
+     * It takes an integer parameter 'im' which is used to determine whether to return the primal objective value or not.
+     * The function operates on the matrix A and the vector M, which are defined outside the function.
+     *
+     * @param im an integer parameter used to determine whether to return the primal objective value or not.
+     * @return the primal objective value if im is 1, otherwise returns 0.0
+     *
+     * Variables used:
+     * - [J]: an integer variable used to store the column index of the pivot element.
+     * - [I]: an integer variable used to store the row index of the pivot element.
+     * - [min]: a double variable used to store the minimum value in the last row of the matrix A.
+     * - [PI]: a double variable used to store the primal objective value.
+     * - [sum]: a double variable used to store the minimum ratio of the last column to the pivot column.
+     * - [ratio]: a double variable used to store the ratio of the last column to the pivot column for each row.
+     */
+    private fun primal(im: Int): Double {
+        var J = n
+        var I = 0
+        var min = 0.0
+        var PI: Double
+
+        for (j in 0 until n) {
+            if (A[m][j] < min) {
+                min = A[m][j]
+                J = j
+            }
+        }
+
+        var sum = -1.0
+        var ratio: Double
         for (i in 0 until m) {
-            if (M[i + n] < n) {
-                ans[M[i + n]] = A[i][n]
+            if (A[i][J] > 0) {
+                ratio = A[i][n] / A[i][J]
+                if (sum == -1.0 || sum > ratio) {
+                    sum = ratio
+                    I = i
+                }
+            }
+        }
+
+        if (im == 1) {
+            PI = A[I][n] * A[m][J] / A[I][J]
+            if (PI < 0) {
+                PI *= -1
+            }
+            return PI
+        }
+        operate(I, J)
+        val temp = M[I + n]
+        M[I + n] = M[J]
+        M[J] = temp
+        return 0.0
+    }
+
+    /**
+     * This function implements the dual simplex algorithm to solve linear programming problems.
+     * It takes an integer parameter 'im' which is used to determine whether to return the dual objective value or not.
+     * The function operates on the matrix A and the vector M, which are defined outside the function.
+     *
+     * @param im The iteration number.
+     * @return The dual objective function value.
+     *
+     * Variables used:
+     * - [J]: an integer variable used to store the column index of the pivot element.
+     * - [I]: an integer variable used to store the row index of the pivot element.
+     * - [min]: a double variable used to store the minimum value in the last row of the matrix A.
+     * - [PI]: a double variable used to store the primal objective value.
+     * - [sum]: a double variable used to store the minimum ratio of the last column to the pivot column.
+     * - [ratio]: a double variable used to store the ratio of the last column to the pivot column for each row.
+     */
+    private fun dual(im: Int): Double {
+        var I = m
+        var J = 0
+        var min = 0.0
+        var DI: Double
+
+        for (i in 0 until m) {
+            if (A[i][n] < min) {
+                min = A[i][n]
+                I = i
+            }
+        }
+
+        var sum = -1.0
+        var ratio: Double
+        for (j in 0 until n) {
+            if (A[I][j] < 0) {
+                ratio = A[m][j] / A[I][j]
+                if (sum == -1.0 || sum > ratio) {
+                    sum = ratio
+                    J = j
+                }
+            }
+        }
+
+        if (im == 1) {
+            DI = A[I][n] * A[m][J] / A[I][J]
+            if (DI < 0) {
+                DI *= -1
+            }
+            return DI
+        }
+        operate(I, J)
+
+        val temp = M[I + n]
+        M[I + n] = M[J]
+        M[J] = temp
+        return 0.0
+    }
+
+    /**
+     * This function performs an operation on a given matrix A, where it takes two indices a and b, and modifies the matrix A in place.
+     * It calculates the inverse of the element at index (a, b) and updates the corresponding row and column of the matrix A.
+     * It also updates the remaining elements of the matrix A using the formula ((B[a][b] * B[i][j]) - (B[a][j] * B[i][b])) / p.
+     * - [a]: The row index of the element to be operated on.
+     * - [b]: The column index of the element to be operated on.
+     * - [A]: The matrix to be operated on.
+     * - [m]: The number of rows in the matrix A.
+     * - [n]: The number of columns in the matrix A.
+     */
+    private fun operate(a: Int, b: Int) {
+        val p: Double
+
+        val B = A.map { it.clone() }
+
+        p = B[a][b]
+        A[a][b] = 1 / p
+
+        for (i in 0 until m+1) {
+            if (i != a) {
+                A[i][b] = -1 * B[i][b] / p
+            }
+        }
+
+        for (j in 0 until n+1) {
+            if (j != b) {
+                A[a][j] = B[a][j] / p
+            }
+        }
+        for (i in 0 until m+1) {
+            for (j in 0 until n+1) {
+                if ((i != a) && (j != b)) {
+                    A[i][j] = ((B[a][b] * B[i][j]) - (B[a][j] * B[i][b])) / p
+                }
             }
         }
     }
 
-    private fun CreateEquations() {
-        n = feeds.size
-        m = n + 10
-        nutrients = Nutrients.getInstance()
-
-        M = IntArray(m + n)
-        for (i in 0 until m + n) { M[i] = i }
-
-        A = Array(m + 1) { Array(n + 1) { 0.0 } }
-        for (i in 0 until m + 1) for (j in 0 until n + 1) A[i][j] = 0.0
-
-        for ((i, f) in feeds.withIndex()) {
-            A[0][i] = f.details[0]
-            A[1][i] = -1 * f.details[0]
-        }
-        A[0][n] = nutrients.dm * 100
-        A[1][n] = -1 * nutrients.dm * 100
-        for ((i, f) in feeds.withIndex()) {
-            A[2][i] = f.details[1]
-            A[3][i] = -1 * f.details[1]
-        }
-        A[2][n] = nutrients.cp / 10 * 1.1
-        A[3][n] = -1 * nutrients.cp / 10
-        for ((i, f) in feeds.withIndex()) {
-            println(f.details.toList())
-            A[4][i] = f.details[2]
-            A[5][i] = -1 * f.details[2]
-        }
-        A[4][n] = nutrients.tdn / 10 * 1.1
-        A[5][n] = -1 * nutrients.tdn / 10
-        for (i in 0 until n) {
-            if (i < 8) {
-                A[6][i] = 1.0
-                A[7][i] = -1.0
-                A[8][i] = 0.0
-                A[9][i] = 0.0
-            } else {
-                A[6][i] = 0.0
-                A[7][i] = 0.0
-                A[8][i] = 1.0
-                A[9][i] = -1.0
+    /**
+     * This function performs the simplex algorithm to solve a linear programming problem in standard form.
+     * It takes in the problem's constraint matrix, objective function coefficients, and right-hand side values,
+     * and returns the optimal solution and optimal objective value, if they exist.
+     * - [ans]: an array of doubles that will store the optimal solution
+     * - [n]: the number of variables (feeds selected)
+     * - [M]: an array used to keep track of the indices of the basic and non-basic variables in the simplex algorithm.
+     * - [A]: a matrix representing the coefficients of the constraints
+     */
+    private fun result() {
+        ans = Array(n) { 0.0 }
+        for (i in 0 until m) {
+            if (M[i + n] < n) {
+                ans[M[i + n]] = A[i][n]
             }
-        }
-        A[6][n] = nutrients.dm * 0.8
-        A[7][n] = -1 * nutrients.dm * 0.4
-        A[8][n] = nutrients.dm * 0.7
-        A[9][n] = -1 * nutrients.dm * 0.2
-
-        for ((i, f) in feeds.withIndex()) {
-            A[10 + i][i] = 1.0
-            A[10 + i][n] = f.percentage[nutrients.type] * nutrients.dm / 100
-        }
-        for ((i, f) in feeds.withIndex()) {
-            A[m][i] = f.cost
         }
     }
 
