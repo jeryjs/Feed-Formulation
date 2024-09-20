@@ -53,5 +53,6 @@
     <string name="welcome_to_icar_nianp">Welcome to ICAR-NIANP</string>
     <string name="icar_nianp_website"><a href="http://nianp.res.in/">ICAR-NIANP Website</a></string>
     <string name="icar_nianp_desc">The ICAR-National Institute of Animal Nutrition and Physiology (ICAR-NIANP) was established on 24th November 1995 at Bangalore under the aegis of Indian Council of Agricultural Research (ICAR), New Delhi.\n\nThe Institute is mandated to conduct basic and fundamental research with respect to animal feed resource management using physiological-nutritional approaches to improve animal productivity and profitability of livestock farmers.\n\nThe institute\'s new campus was inaugurated by the Honourable Union Minister for Agriculture, Shri Rajnath Singhji on 13th August 2003.</string>
+    <string name="cattle_and_buffalo_feed_formulation">Cattle and Buffalo Feed Formulation</string>
 
 </resources>

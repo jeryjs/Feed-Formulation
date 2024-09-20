@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.jery.feedformulation.R
 import com.jery.feedformulation.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -21,7 +21,9 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
+        binding.btnTmrmaker.setOnClickListener {
+            findNavController().navigate(R.id.nav_tmrmaker)
+        }
         return root
     }
 
