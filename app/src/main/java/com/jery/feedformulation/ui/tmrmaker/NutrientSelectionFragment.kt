@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.jery.feedformulation.R
 import com.jery.feedformulation.databinding.FragmentNutrientSelectionBinding
 import com.jery.feedformulation.model.Nutrients
 import com.jery.feedformulation.viewmodel.TmrmakerViewModel
+
 
 class NutrientSelectionFragment : Fragment() {
 
@@ -26,8 +28,16 @@ class NutrientSelectionFragment : Fragment() {
         tmrmakerViewModel = ViewModelProvider(requireActivity())[TmrmakerViewModel::class.java]
         _binding = FragmentNutrientSelectionBinding.inflate(inflater, container, false)
 
+        (context as AppCompatActivity).supportActionBar!!.title =
+            getString(R.string.nutrient_requirements, tmrmakerViewModel.selectedCattle)
+
         val itemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 updateNutrients()
             }
 
@@ -46,8 +56,10 @@ class NutrientSelectionFragment : Fragment() {
         val bw = b.sprBW.selectedItem.toString().replace(Regex("""(\d+).+"""), "$1").toDouble()
         val my = b.sprMY.selectedItem.toString().replace(Regex("""(\d+).+"""), "$1").toDouble()
         val mf = b.sprMF.selectedItem.toString().replace(Regex("""(\d+).+"""), "$1").toDouble()
-        val pr = b.sprPr.selectedItem.toString().replace(Regex("""(\d+).+"""), "$1").toIntOrNull() ?: 0
+        val pr =
+            b.sprPr.selectedItem.toString().replace(Regex("""(\d+).+"""), "$1").toIntOrNull() ?: 0
         val nutrients = Nutrients(bw, my, mf, pr)
+        nutrients.type = tmrmakerViewModel.selectedCattleId.value!!
         nutrients.calculateNutrients()
         tmrmakerViewModel.selectNutrients(nutrients)
         displayNutrientValues(nutrients)

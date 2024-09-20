@@ -1,30 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- res/layout/fragment_cattle_selection.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     tools:context=".ui.tmrmaker.CattleSelectionFragment">
 
-    <Button
-        android:id="@+id/buttonCow"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/textGreet"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cow"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/buttonBuffalo"
-        app:layout_constraintVertical_chainStyle="packed" />
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:textAlignment="center"
+        android:text="@string/tmrmaker_title"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/buttonBuffalo"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/textDesc"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Buffalo"
-        app:layout_constraintTop_toBottomOf="@+id/buttonCow"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:layout_below="@id/textGreet"
+        android:textAlignment="center"
+        android:text="@string/tmrmaker_greeting"
+        android:textSize="18sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCattle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textDesc"
+        android:layout_margin="8dp"
+        android:divider="?attr/dividerColor"
+        tools:listitem="@layout/item_cattle"
+        tools:layout_height="300dp"/>
+</RelativeLayout>

@@ -13,14 +13,6 @@ data class Nutrients (
     var dm = 0.0
     var cp = 0.0
     var tdn = 0.0
-    companion object {
-        private lateinit var nutrients: Nutrients
-
-        fun getInstance(): Nutrients {
-            return if (::nutrients.isInitialized) nutrients else Nutrients(0.0,0.0,0.0,0)
-        }
-        fun setInstance(n: Nutrients) { nutrients = n }
-    }
 
     fun calculateNutrients(): List<Double> {
         val s = 100

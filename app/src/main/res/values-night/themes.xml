@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.ICARNIANPSmartTools" parent="Theme.Material3.DynamicColors.DayNight">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#FF018786</item> <!-- Darker version of teal_200 -->
-        <item name="colorPrimaryVariant">#FF015F5F</item> <!-- Darker version of teal_700 -->
-        <item name="colorOnPrimary">#FF000000</item>
+        <item name="colorPrimary">#FF018786</item>
+        <item name="colorPrimaryVariant">#FF015F5F</item>
+        <item name="colorOnPrimary">#000000</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#FF03DAC5</item>
         <item name="colorSecondaryVariant">#FF018786</item>
@@ -12,5 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="colorOnBackground">#FFFFFF</item>
+        <item name="cardBackgroundColor">#40018786</item>
     </style>
 </resources>

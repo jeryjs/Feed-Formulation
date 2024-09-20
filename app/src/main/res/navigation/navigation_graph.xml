@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
+    android:id="@+id/navigation_graph"
     app:startDestination="@+id/nav_tmrmaker">
 
     <fragment
@@ -26,6 +26,12 @@
     <fragment
         android:id="@+id/nav_settings"
         android:name="com.jery.feedformulation.ui.settings.SettingsFragment"
-        android:label="@string/menu_settings" />
+        android:label="@string/menu_settings"/>
+
+    <fragment
+        android:id="@+id/nav_more"
+        android:name="com.jery.feedformulation.ui.more.MoreFragment"
+        android:label="@string/menu_more"
+        tools:layout="@layout/fragment_more" />
 
 </navigation>

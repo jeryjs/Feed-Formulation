@@ -20,6 +20,7 @@ class FeedAdapter(
     feedsLiveData: LiveData<List<Feed>>,
     lifecycleOwner: LifecycleOwner,
     private val isSelectFeedsEnabled: Boolean,
+    private val onFeedSelected: (Feed) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var feeds: List<Feed> = emptyList()
@@ -99,6 +100,7 @@ class FeedAdapter(
                 binding.checkBox.isChecked = feed.checked
                 binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
                     feed.checked = isChecked
+                    onFeedSelected(feed)
                 }
                 itemView.setOnClickListener { binding.checkBox.performClick() }
             } else {

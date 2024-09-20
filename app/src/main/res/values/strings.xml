@@ -1,87 +1,42 @@
+<!-- Application Strings -->
 <resources>
     <string name="app_name">ICAR-NIANP Smart Tools</string>
-    <string name="nav_header_title">Smart Tools</string>
-    <string name="nav_header_subtitle">ICAR-NIANP</string>
+    <string name="nav_header_title" translatable="false">Smart Tools</string>
+    <string name="nav_header_subtitle" translatable="false">ICAR-NIANP</string>
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
 
+    <!-- Menu Items -->
     <string name="menu_home">Home</string>
     <string name="menu_feeds">Feeds</string>
     <string name="menu_tmrmaker">TMR Maker</string>
     <string name="menu_settings">Settings</string>
 
-    <string-array name="bw_array">
-        <item>200 KG</item>
-        <item>250 KG</item>
-        <item>300 KG</item>
-        <item>350 KG</item>
-        <item>400 KG</item>
-        <item>450 KG</item>
-        <item>500 KG</item>
-        <item>550 KG</item>
-        <item>600 KG</item>
-    </string-array>
-
-    <string-array name="my_array">
-        <item>3 KG</item>
-        <item>4 KG</item>
-        <item>5 KG</item>
-        <item>6 KG</item>
-        <item>7 KG</item>
-        <item>8 KG</item>
-        <item>9 KG</item>
-        <item>10 KG</item>
-        <item>11 KG</item>
-        <item>12 KG</item>
-        <item>13 KG</item>
-        <item>14 KG</item>
-        <item>15 KG</item>
-        <item>16 KG</item>
-        <item>17 KG</item>
-        <item>18 KG</item>
-        <item>19 KG</item>
-        <item>20 KG</item>
-    </string-array>
-
-    <string-array name="mf_array">
-        <item>3 %</item>
-        <item>4 %</item>
-        <item>5 %</item>
-        <item>6 %</item>
-        <item>7 %</item>
-    </string-array>
-
-    <string-array name="pr_array">
-        <item>Not Pregnant</item>
-        <item>6 Months</item>
-        <item>7 Months</item>
-        <item>8 Months</item>
-    </string-array>
-
-    <string-array name="type_array">
-        <item>Roughages</item>
-        <item>Concentrates</item>
-        <item>Minerals</item>
-    </string-array>
-
-    <string-array name="cattle_array">
-        <item>Cow</item>
-        <item>Buffalo</item>
-    </string-array>
-
     <string name="dm_value" translatable="false">DM: %1$.2f KG</string>
     <string name="cp_value" translatable="false">CP: %1$.2f g</string>
     <string name="tdn_value" translatable="false">TDN: %1$.2f g</string>
 
-    <!-- Preference Titles -->
+    <!-- Application Preferences -->
     <string name="application">Application</string>
-
-    <!-- Appearance Preferences -->
     <string name="theme_switch">Day/Night</string>
     <string name="theme_switch_desc">Toggle between day and night themes</string>
     <string name="language">Language</string>
     <string name="language_desc">Change language</string>
+    <string name="use_bottom_navigation">Use Bottom Navigation</string>
+    <string name="use_bottom_navigation_desc">Toggle between bottom navigation and side navigation</string>
+
+    <!-- Feed Formulation -->
     <string name="body_weight_kg">Body Weight (Kg)</string>
     <string name="milk_yield_kg">Milk Yield (Kg)</string>
     <string name="milk_fat">Milk Fat (%)</string>
     <string name="pregnant_m">Pregnant (M)</string>
+
+    <string name="nutrient_requirements">Cattle details of %1$s</string>
+    <string name="select_feeds">Select feeds for %1$s</string>
+    <string name="feeds_to_be_included_in_ration_for">Feeds to be included in ration for %1$s</string>
+
+    <string name="tmrmaker_title">Feed Formulation for Cattle and Buffalo</string>
+    <string name="tmrmaker_greeting">We are happy to introduce an Android application for making total mixed ration for dairy cow and milch buffalo.\nClick one of the options below and follow the pages</string>
+    <string name="menu_more">More</string>
 
 </resources>

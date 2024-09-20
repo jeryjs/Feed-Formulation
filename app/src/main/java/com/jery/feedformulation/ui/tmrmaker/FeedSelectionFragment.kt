@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jery.feedformulation.R
 import com.jery.feedformulation.databinding.FragmentFeedSelectionBinding
 import com.jery.feedformulation.model.Feed
 import com.jery.feedformulation.ui.adapter.FeedAdapter
@@ -29,6 +31,11 @@ class FeedSelectionFragment : Fragment() {
         feedsViewModel = ViewModelProvider(requireActivity())[FeedsViewModel::class.java]
         _binding = FragmentFeedSelectionBinding.inflate(inflater, container, false)
 
+        (context as AppCompatActivity).supportActionBar!!.title =
+            getString(R.string.select_feeds, tmrmakerViewModel.selectedCattle)
+
+        tmrmakerViewModel.selectFeeds(feedsViewModel.feeds.value!!)
+
         setupRecyclerView()
 
         return binding.root
@@ -39,6 +46,9 @@ class FeedSelectionFragment : Fragment() {
             feedsViewModel.feeds,
             viewLifecycleOwner,
             isSelectFeedsEnabled = true,
+            onFeedSelected = { feed ->
+                    tmrmakerViewModel.selectFeeds(feedsViewModel.feeds.value!!)
+            }
         )
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)

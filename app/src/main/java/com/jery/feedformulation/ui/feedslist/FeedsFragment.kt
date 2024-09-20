@@ -52,6 +52,9 @@ class FeedsFragment : Fragment() {
             feedsViewModel.feeds,
             viewLifecycleOwner,
             isSelectFeedsEnabled = false,
+            onFeedSelected = { feed ->
+                Toast.makeText(requireContext(), "Feed: ${feed.name}", Toast.LENGTH_SHORT).show()
+            }
         )
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = feedAdapter

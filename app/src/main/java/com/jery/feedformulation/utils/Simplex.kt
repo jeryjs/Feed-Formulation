@@ -5,8 +5,11 @@ package com.jery.feedformulation.utils
 import android.util.Log
 import com.jery.feedformulation.model.Feed
 import com.jery.feedformulation.model.Nutrients
+import com.jery.feedformulation.model.SimplexResult
+import com.jery.feedformulation.viewmodel.TmrmakerViewModel
 
 class Simplex internal constructor() {
+    private lateinit var tmrmakerViewModel: TmrmakerViewModel
     private lateinit var nutrients: Nutrients
     private lateinit var A: Array<Array<Double>>
     private lateinit var M: IntArray
@@ -39,8 +42,10 @@ class Simplex internal constructor() {
      * - [P]: A boolean variable used to track if the current feed is the one with the highest protein percentage.
      * - [k]: A double variable used to store the highest protein percentage.
      */
-    fun solve(feedsList: List<Feed>) {
-        feeds = feedsList
+    fun solve(tmrmakerViewModel: TmrmakerViewModel) {
+        this.tmrmakerViewModel = tmrmakerViewModel
+        nutrients = tmrmakerViewModel.selectedNutrients.value!!
+        feeds = tmrmakerViewModel.selectedFeeds.value!!
 
         createEquations()
         simplex()
@@ -72,6 +77,13 @@ class Simplex internal constructor() {
         total_dm /= 100
         total_cp *= 10
         total_tdn *= 10
+
+        tmrmakerViewModel.setResult(
+            SimplexResult(
+                total_dm, total_cp, total_tdn,
+                feeds.mapIndexed { index, feed -> feed.name to ans[index] }
+            )
+        )
     }
 
     /**
@@ -88,7 +100,6 @@ class Simplex internal constructor() {
         n = feeds.size
         m = 15
 
-        nutrients = Nutrients.getInstance()
         println("nutrients: ${nutrients.dm}, ${nutrients.cp}, ${nutrients.tdn}")
 
         M = IntArray(m + n)
