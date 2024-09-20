@@ -34,4 +34,16 @@
         android:label="@string/menu_more"
         tools:layout="@layout/fragment_more" />
 
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.jery.feedformulation.ui.more.AboutFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_about" />
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_about_org"-->
+<!--        android:name="com.jery.feedformulation.ui.more.AboutOrgFragment"-->
+<!--        android:label="@string/menu_theme"-->
+<!--        tools:layout="@layout/fragment_theme" />-->
+
 </navigation>

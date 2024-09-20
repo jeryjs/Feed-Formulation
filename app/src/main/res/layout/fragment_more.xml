@@ -24,6 +24,7 @@
 
     <!-- Settings -->
     <TextView
+        android:id="@+id/tvSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
@@ -32,21 +33,6 @@
         android:drawablePadding="24dp"
         android:padding="24dp"
         android:text="@string/menu_settings"
-        android:textSize="18sp"
-        android:onClick="navigateToSettings"
-        app:drawableStartCompat="@drawable/ic_settings"
-        app:drawableTint="?attr/colorPrimary" />
-
-    <!-- Settings -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        android:drawablePadding="24dp"
-        android:padding="24dp"
-        android:text="Language"
         android:textSize="18sp"
         app:drawableStartCompat="@drawable/ic_settings"
         app:drawableTint="?attr/colorPrimary" />
@@ -59,6 +45,7 @@
 
     <!-- About -->
     <TextView
+        android:id="@+id/tvAbout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
@@ -66,13 +53,14 @@
         android:focusable="true"
         android:drawablePadding="24dp"
         android:padding="24dp"
-        android:text="About"
+        android:text="@string/menu_about"
         android:textSize="18sp"
         app:drawableStartCompat="@drawable/ic_info"
         app:drawableTint="?attr/colorPrimary" />
 
     <!-- Help -->
     <TextView
+        android:id="@+id/tvAboutOrganization"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
@@ -84,7 +72,5 @@
         android:textSize="18sp"
         app:drawableStartCompat="@drawable/ic_anim_home"
         app:drawableTint="?attr/colorPrimary" />
-
-    <!-- Add more necessary details here -->
 
 </LinearLayout>

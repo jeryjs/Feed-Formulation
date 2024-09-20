@@ -5,25 +5,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.jery.feedformulation.R
 import com.jery.feedformulation.databinding.FragmentMoreBinding
-import com.jery.feedformulation.ui.settings.SettingsFragment
 
 class MoreFragment : Fragment() {
-    private  lateinit var _binding: FragmentMoreBinding
-    private val binding get() = _binding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        _binding = FragmentMoreBinding.inflate(layoutInflater)
+    private var _binding: FragmentMoreBinding? = null
+    private val binding get() = _binding!!
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentMoreBinding.inflate(inflater, container, false)
+
+        binding.tvSettings.setOnClickListener { findNavController().navigate(R.id.nav_settings) }
+        binding.tvAbout.setOnClickListener { findNavController().navigate(R.id.nav_about) }
+
+        return binding.root
     }
 
-    fun navigateToSettings(view: View) {
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, SettingsFragment())
-            .addToBackStack("app")
-            .commit()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
-
 }

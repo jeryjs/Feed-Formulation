@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         val isBottomNav = sharedPreferences.getBoolean("use_bottom_nav", true)
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        val navController = findNavController(R.id.nav_host_fragment)
         setupNavigation(navController, isBottomNav)
 
         sharedPreferences.registerOnSharedPreferenceChangeListener { _, key ->
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }
