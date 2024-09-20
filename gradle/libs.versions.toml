@@ -13,6 +13,8 @@ lifecycleViewmodelKtx = "2.8.6"
 navigationFragmentKtx = "2.8.1"
 navigationUiKtx = "2.8.1"
 gson = "2.11.0"
+expandableFab = "1.2.1"
+preference = "1.2.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -27,6 +29,8 @@ androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifec
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+expandable-fab = { group = "com.nambimobile.widgets", name = "expandable-fab", version.ref = "expandableFab" }
+androidx-preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

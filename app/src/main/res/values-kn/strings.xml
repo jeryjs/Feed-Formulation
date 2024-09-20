@@ -1,0 +1,24 @@
+<!-- res/values-kn/strings.xml -->
+<resources>
+    <string name="app_name">ಫೀಡ್ ಫಾರ್ಮುಲೇಶನ್</string>
+    <string name="menu_home">ಮನೆ</string>
+    <string name="menu_feeds">ಫೀಡ್ಸ್</string>
+    <string name="menu_tmrmaker">ಟಿಎಂಆರ್ ಮೇಕರ್</string>
+    <string name="menu_settings">ಸೆಟ್ಟಿಂಗ್ಗಳು</string>
+    <string name="theme_switch">ದಿನ/ರಾತ್ರಿ</string>
+    <string name="theme_switch_desc">ದಿನ ಮತ್ತು ರಾತ್ರಿ ಥೀಮ್‌ಗಳ ನಡುವೆ ಬದಲಾಯಿಸಿ</string>
+    <string name="application">ಅಪ್ಲಿಕೇಶನ್</string>
+    <string name="language">ಭಾಷೆ</string>
+    <string name="language_desc">ಭಾಷೆಯನ್ನು ಬದಲಾಯಿಸಿ</string>
+    <string name="body_weight_kg">ದೇಹದ ತೂಕ (KG)</string>
+    <string name="milk_yield_kg">ಹಾಲಿನ ಉತ್ಪಾದನೆ (KG)</string>
+    <string name="milk_fat">ಹಾಲಿನ ಕೊಬ್ಬು (%)</string>
+    <string name="pregnant_m">ಗರ್ಭಿಣಿ (M)</string>
+
+    <string-array name="pr_array">
+        <item>ಗರ್ಭಿಣಿ ಅಲ್ಲ</item>
+        <item>6 ತಿಂಗಳು</item>
+        <item>7 ತಿಂಗಳು</item>
+        <item>8 ತಿಂಗಳು</item>
+    </string-array>
+</resources>

@@ -1,0 +1,12 @@
+<!-- res/values/arrays.xml -->
+<resources>
+    <string-array name="language_options">
+        <item>English</item>
+        <item>ಕನ್ನಡ</item>
+    </string-array>
+
+    <string-array name="language_values">
+        <item>en</item>
+        <item>kn</item>
+    </string-array>
+</resources>

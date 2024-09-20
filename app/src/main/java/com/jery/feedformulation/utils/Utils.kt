@@ -3,12 +3,19 @@ package com.jery.feedformulation.utils
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonParser
+import com.google.gson.reflect.TypeToken
+import com.jery.feedformulation.model.Feed
 import java.io.File
 import java.io.FileInputStream
+import java.io.FileOutputStream
 import java.io.IOException
 import java.nio.charset.Charset
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 object Utils {
     fun hideKeyboard(view: View) {
@@ -27,6 +34,16 @@ object Utils {
         } catch (e: IOException) {
             e.printStackTrace()
             ""
+        }
+    }
+
+    fun writeJsonToFile(file: File, json: String) {
+        try {
+            FileOutputStream(file).use { outputStream ->
+                outputStream.write(json.toByteArray())
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
     }
 
