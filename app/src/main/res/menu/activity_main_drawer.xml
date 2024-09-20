@@ -33,6 +33,10 @@
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_info"
             android:title="@string/menu_about" />
+        <item
+            android:id="@+id/nav_about_org"
+            android:icon="@drawable/ic_workspace"
+            android:title="@string/nav_header_subtitle" />
     </group>
 
 </menu>

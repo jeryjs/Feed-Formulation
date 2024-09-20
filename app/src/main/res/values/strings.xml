@@ -44,10 +44,14 @@
     <string name="tmrmaker_greeting">We are happy to introduce an Android application for making total mixed ration for dairy cow and milch buffalo.\nClick one of the options below and follow the pages</string>
     <string name="about_text_block_1">This mobile application has been developed by a team of scientist at ICAR-National Institute of Animal Nutrition and Physiology (NIANP), Bengaluru.\nThis application is useful for the farmer to prepare balanced total mixed ration for a cow or buffalo on least cost basis with available feed ingredients.\nNutrient requirements are calculated on the basis of ICAR (2013) requirements and examples are given based on the practical field condition.\nIt is encouraged to use more number of locally available ingredients for deriving best combination of least cost feed formulation.</string>
     <string name="about_text_block_2">Disclaimer: The calculated ration formation is based on the input given by the user not by the developer.\nThe ration formulated by this app is only guideline and it cannot be claimed for any commercial or legal purpose.\nThe loss or any misguidance of the application cannot be claimed from the developer.\nIt is a guideline of ration formulation.\nIt may be verified by the Animal Nutritionist before feeding to the animals.\n© ICAR-NIANP, Bengaluru, 2021</string>
+    <string name="acknowledgement">Acknowledgement:</string>
     <string name="software_assistance">Software Assistance:</string>
     <string name="software_assistance_desc">• Dr. Vishal Patil (Jain University)\n• Mr. Vrishab Jain (Jain University)\n• Mr. Jery J.S (Jain University)\n• Dr. Radha Gupta</string>
     <string name="app_concept_and_development">App Concept and Development:</string>
     <string name="app_concept_and_development_desc">• Dr. D.Rajendran\n• Dr. N K S Gowda\n• Dr. S Ananadan\n• Dr. SBN Rao\n• Dr. DT Pal\n• Dr. M Gopi\n• Dr. Raghavendra Bhatta</string>
-    <string name="acknowledgement">Acknowledgement:</string>
+
+    <string name="welcome_to_icar_nianp">Welcome to ICAR-NIANP</string>
+    <string name="icar_nianp_website"><a href="http://nianp.res.in/">ICAR-NIANP Website</a></string>
+    <string name="icar_nianp_desc">The ICAR-National Institute of Animal Nutrition and Physiology (ICAR-NIANP) was established on 24th November 1995 at Bangalore under the aegis of Indian Council of Agricultural Research (ICAR), New Delhi.\n\nThe Institute is mandated to conduct basic and fundamental research with respect to animal feed resource management using physiological-nutritional approaches to improve animal productivity and profitability of livestock farmers.\n\nThe institute\'s new campus was inaugurated by the Honourable Union Minister for Agriculture, Shri Rajnath Singhji on 13th August 2003.</string>
 
 </resources>

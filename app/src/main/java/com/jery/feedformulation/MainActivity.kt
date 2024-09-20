@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
         sharedPreferences.registerOnSharedPreferenceChangeListener { _, key ->
             if (key == "use_bottom_nav") {
-                val isBottomNavUpdated = sharedPreferences.getBoolean(key, true)
+                val isBottomNavUpdated = sharedPreferences.getBoolean(key, false)
                 setupNavigation(navController, isBottomNavUpdated)
                 this.recreate()
             }

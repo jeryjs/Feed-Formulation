@@ -25,6 +25,7 @@ class MoreFragment : Fragment() {
         binding.tvExampleCm.setOnClickListener { findNavController().navigate(R.id.nav_example_cm) }
         binding.tvSettings.setOnClickListener { findNavController().navigate(R.id.nav_settings) }
         binding.tvAbout.setOnClickListener { findNavController().navigate(R.id.nav_about) }
+        binding.tvAboutOrg.setOnClickListener { findNavController().navigate(R.id.nav_about_org) }
 
         return binding.root
     }
