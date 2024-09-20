@@ -18,6 +18,14 @@
             android:icon="@drawable/ic_anim_info"
             android:title="@string/menu_tmrmaker" />
         <item
+            android:id="@+id/nav_example_tmr"
+            android:icon="@drawable/ic_help"
+            android:title="@string/menu_example_tmr" />
+        <item
+            android:id="@+id/nav_example_cm"
+            android:icon="@drawable/ic_help"
+            android:title="@string/menu_example_cm" />
+        <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings"
             android:title="@string/menu_settings" />

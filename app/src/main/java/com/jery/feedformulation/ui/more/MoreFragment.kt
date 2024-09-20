@@ -21,6 +21,8 @@ class MoreFragment : Fragment() {
     ): View? {
         _binding = FragmentMoreBinding.inflate(inflater, container, false)
 
+        binding.tvExampleTmr.setOnClickListener { findNavController().navigate(R.id.nav_example_tmr) }
+        binding.tvExampleCm.setOnClickListener { findNavController().navigate(R.id.nav_example_cm) }
         binding.tvSettings.setOnClickListener { findNavController().navigate(R.id.nav_settings) }
         binding.tvAbout.setOnClickListener { findNavController().navigate(R.id.nav_about) }
 

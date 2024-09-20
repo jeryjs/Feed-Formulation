@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -29,6 +30,12 @@ class CattleSelectionFragment : Fragment() {
         tmrmakerViewModel = ViewModelProvider(requireActivity())[TmrmakerViewModel::class.java]
         _binding = FragmentCattleSelectionBinding.inflate(inflater, container, false)
 
+        try {
+            (context as AppCompatActivity).supportActionBar!!.title = getString(R.string.select_cattle)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
         val cattleArray = resources.getStringArray(R.array.cattle_array)
         val cattleIcons = listOf(R.drawable.ic_cattle_cow, R.drawable.ic_cattle_buffalo)
 
@@ -45,7 +52,12 @@ class CattleSelectionFragment : Fragment() {
 
     private fun navigateToNextFragment() {
         parentFragmentManager.commit {
-            setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
+            setCustomAnimations(
+                R.anim.enter_from_right,
+                R.anim.exit_to_left,
+                R.anim.enter_from_left,
+                R.anim.exit_to_right
+            )
             replace(R.id.fragment_container, NutrientSelectionFragment())
             addToBackStack(null)
         }
@@ -90,7 +102,8 @@ class CattleSelectionFragment : Fragment() {
             fun bind(cattleName: String, cattleIcon: Int) {
                 binding.imageCattle.setImageResource(cattleIcon)
                 binding.textCattleName.text = cattleName
-                binding.textCattleDesc.text = resources.getStringArray(R.array.cattle_desc_array)[adapterPosition]
+                binding.textCattleDesc.text =
+                    resources.getStringArray(R.array.cattle_desc_array)[adapterPosition]
             }
         }
     }

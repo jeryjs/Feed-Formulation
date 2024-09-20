@@ -7,6 +7,8 @@
     <string name="menu_settings">ಸೆಟ್ಟಿಂಗ್ಗಳು</string>
     <string name="menu_more">ಹೆಚ್ಚು</string>
     <string name="menu_about">ಬಗ್ಗೆ</string>
+    <string name="menu_example_tmr">ಟಿಎಂಆರ್ ಗೆ ಉದಾಹರಣೆ</string>
+    <string name="menu_example_cm">ಕಾನ್ಸೆಂಟ್ರೇಟ್ ಮಿಶ್ರಣಕ್ಕೆ ಉದಾಹರಣೆ</string>
     <string name="theme_switch">ದಿನ/ರಾತ್ರಿ</string>
     <string name="theme_switch_desc">ದಿನ ಮತ್ತು ರಾತ್ರಿ ಥೀಮ್‌ಗಳ ನಡುವೆ ಬದಲಾಯಿಸಿ</string>
     <string name="application">ಅಪ್ಲಿಕೇಶನ್</string>
@@ -21,6 +23,7 @@
     <string name="navigation_drawer_open">ನಾವಿಗೇಶನ್ ಡ್ರಾಯರ್ ತೆರೆಯಿರಿ</string>
     <string name="navigation_drawer_close">ನಾವಿಗೇಶನ್ ಡ್ರಾಯರ್ ಮುಚ್ಚಿ</string>
     <string name="select_feeds">ಫೀಡ್ಸ್ ಆಯ್ಕೆಮಾಡಿ [%1$s]</string>
+    <string name="select_cattle">ಮೇಕನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
     <string name="nutrient_requirements">ಪೋಷಕಾಂಶದ ಅಗತ್ಯತೆಗಳು [%1$s]</string>
     <string name="feeds_to_be_included_in_ration_for">ರೇಷನ್‌ನಲ್ಲಿ ಸೇರಿಸಬೇಕಾದ ಫೀಡ್ಸ್ %1$s</string>
     <string name="tmrmaker_title">ಹಸು ಮತ್ತು ಎಮ್ಮೆಗಳಿಗೆ ಫೀಡ್ ಫಾರ್ಮುಲೇಶನ್</string>

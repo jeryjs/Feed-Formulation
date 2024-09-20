@@ -35,6 +35,18 @@
         tools:layout="@layout/fragment_more" />
 
     <fragment
+        android:id="@id/nav_example_tmr"
+        android:name="com.jery.feedformulation.ui.more.ExampleFragment"
+        android:label="@string/menu_example_tmr"
+        tools:layout="@layout/fragment_example" />
+
+    <fragment
+        android:id="@id/nav_example_cm"
+        android:name="com.jery.feedformulation.ui.more.ExampleFragment"
+        android:label="@string/menu_example_cm"
+        tools:layout="@layout/fragment_example" />
+
+    <fragment
         android:id="@+id/nav_about"
         android:name="com.jery.feedformulation.ui.more.AboutFragment"
         android:label="@string/menu_about"

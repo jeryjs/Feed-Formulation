@@ -8,13 +8,43 @@
     tools:context=".ui.more.MoreFragment">
 
     <!-- App Icon -->
-    <ImageView
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="72dp"
-        android:src="@drawable/ic_launcher_foreground"
-        app:tint="?attr/colorSecondary" />
+    <include
+        android:id="@+id/ivAppIcon"
+        layout="@layout/nav_header_main" />
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/tvExampleTmr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:drawablePadding="24dp"
+        android:padding="24dp"
+        android:text="@string/menu_example_tmr"
+        android:textSize="18sp"
+        app:drawableStartCompat="@drawable/ic_help"
+        app:drawableTint="?attr/colorPrimary" />
+
+    <TextView
+        android:id="@+id/tvExampleCm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:drawablePadding="24dp"
+        android:padding="24dp"
+        android:text="@string/menu_example_cm"
+        android:textSize="18sp"
+        app:drawableStartCompat="@drawable/ic_help"
+        app:drawableTint="?attr/colorPrimary" />
 
     <!-- Divider -->
     <View
@@ -70,7 +100,7 @@
         android:padding="24dp"
         android:text="@string/nav_header_subtitle"
         android:textSize="18sp"
-        app:drawableStartCompat="@drawable/ic_anim_home"
+        app:drawableStartCompat="@drawable/ic_anim_info"
         app:drawableTint="?attr/colorPrimary" />
 
 </LinearLayout>
