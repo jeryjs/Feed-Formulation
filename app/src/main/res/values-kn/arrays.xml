@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cattle_array">
+        <item>ಹಸು</item>
+        <item>ಎಮ್ಮೆ</item>
+    </string-array>
+
+    <string-array name="cattle_desc_array">
+        <item>ಮಿಶ್ರ ತಳಿ ಹಸು</item>
+        <item>ಹಾಲು ಎಮ್ಮೆ</item>
+    </string-array>
+
+    <string-array name="pr_array">
+        <item>ಗರ್ಭಿಣಿ ಅಲ್ಲ</item>
+        <item>6 ತಿಂಗಳು</item>
+        <item>7 ತಿಂಗಳು</item>
+        <item>8 ತಿಂಗಳು</item>
+    </string-array>
+</resources>

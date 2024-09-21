@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="feed"
+            type="com.jery.feedformulation.model.Feed" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp">
+
+            <LinearLayout
+                android:id="@+id/feedItemLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:importantForAccessibility="no"
+                    android:rotation="270"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/anim_caret_down"
+                    app:tint="?android:attr/textColorPrimary"
+                    tools:visibility="visible" />
+
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/feedNameTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@{feed.name}"
+                    android:textAppearance="?android:textAppearanceListItem"
+                    tools:text="empty feed" />
+
+                <TextView
+                    android:id="@+id/feedCostTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="30dp"
+                    android:text='@{"₹ " + feed.cost}'
+                    android:textAlignment="textStart"
+                    android:textAppearance="?android:textAppearanceListItemSecondary"
+                    tools:text="₹ x" />
+
+            </LinearLayout>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/detailsLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="2dp"
+                android:paddingStart="24dp"
+                android:visibility="gone"
+                app:chipSpacing="0dp"
+                app:itemSpacing="0dp"
+                tools:visibility="visible">
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"DM: " + feed.details[0] + "%"}'
+                    app:chipCornerRadius="4dp" />
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"CP: " + feed.details[1] + "%"}'
+                    app:chipCornerRadius="4dp" />
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"TDN: " + feed.details[2] + "%"}'
+                    app:chipCornerRadius="4dp" />
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"CA: " + feed.details[3] + "%"}'
+                    app:chipCornerRadius="4dp" />
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"PH: " + feed.details[4] + "%"}'
+                    app:chipCornerRadius="4dp" />
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"PER: " + feed.percentage + "%"}'
+                    app:chipCornerRadius="4dp" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="4dp"
+                android:background="?android:attr/listDivider" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

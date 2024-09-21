@@ -1,0 +1,43 @@
+<!-- res/values-kn/strings.xml -->
+<resources>
+    <string name="app_name">ಫೀಡ್ ಫಾರ್ಮುಲೇಶನ್</string>
+    <string name="menu_home">ಮನೆ</string>
+    <string name="menu_feeds">ಫೀಡ್ಸ್</string>
+    <string name="menu_tmrmaker">ಟಿಎಂಆರ್ ಮೇಕರ್</string>
+    <string name="menu_settings">ಸೆಟ್ಟಿಂಗ್ಗಳು</string>
+    <string name="menu_more">ಹೆಚ್ಚು</string>
+    <string name="menu_about">ಬಗ್ಗೆ</string>
+    <string name="menu_example_tmr">ಟಿಎಂಆರ್ ಗೆ ಉದಾಹರಣೆ</string>
+    <string name="menu_example_cm">ಕಾನ್ಸೆಂಟ್ರೇಟ್ ಮಿಶ್ರಣಕ್ಕೆ ಉದಾಹರಣೆ</string>
+    <string name="theme_switch">ದಿನ/ರಾತ್ರಿ</string>
+    <string name="theme_switch_desc">ದಿನ ಮತ್ತು ರಾತ್ರಿ ಥೀಮ್‌ಗಳ ನಡುವೆ ಬದಲಾಯಿಸಿ</string>
+    <string name="application">ಅಪ್ಲಿಕೇಶನ್</string>
+    <string name="language">ಭಾಷೆ</string>
+    <string name="language_desc">ಭಾಷೆಯನ್ನು ಬದಲಾಯಿಸಿ</string>
+    <string name="body_weight_kg">ದೇಹದ ತೂಕ (KG)</string>
+    <string name="milk_yield_kg">ಹಾಲಿನ ಉತ್ಪಾದನೆ (KG)</string>
+    <string name="milk_fat">ಹಾಲಿನ ಕೊಬ್ಬು (%)</string>
+    <string name="pregnant_m">ಗರ್ಭಿಣಿ (M)</string>
+    <string name="use_bottom_navigation">ಕೆಳಗಿನ ನಾವಿಗೇಶನ್ ಬಳಸಿ</string>
+    <string name="use_bottom_navigation_desc">ಕೆಳಗಿನ ನಾವಿಗೇಶನ್ ಮತ್ತು ಬದಿಯ ನಾವಿಗೇಶನ್ ನಡುವೆ ಬದಲಾಯಿಸಿ</string>
+    <string name="navigation_drawer_open">ನಾವಿಗೇಶನ್ ಡ್ರಾಯರ್ ತೆರೆಯಿರಿ</string>
+    <string name="navigation_drawer_close">ನಾವಿಗೇಶನ್ ಡ್ರಾಯರ್ ಮುಚ್ಚಿ</string>
+    <string name="select_feeds">ಫೀಡ್ಸ್ ಆಯ್ಕೆಮಾಡಿ [%1$s]</string>
+    <string name="select_cattle">ಮೇಕನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
+    <string name="nutrient_requirements">ಪೋಷಕಾಂಶದ ಅಗತ್ಯತೆಗಳು [%1$s]</string>
+    <string name="feeds_to_be_included_in_ration_for">ರೇಷನ್‌ನಲ್ಲಿ ಸೇರಿಸಬೇಕಾದ ಫೀಡ್ಸ್ %1$s</string>
+    <string name="tmrmaker_title">ಹಸು ಮತ್ತು ಎಮ್ಮೆಗಳಿಗೆ ಫೀಡ್ ಫಾರ್ಮುಲೇಶನ್</string>
+    <string name="tmrmaker_greeting">ಹಾಲು ಹಸು ಮತ್ತು ಹಾಲು ಎಮ್ಮೆಗಳಿಗೆ ಒಟ್ಟು ಮಿಶ್ರ ರೇಷನ್ ಮಾಡಲು ಆಂಡ್ರಾಯ್ಡ್ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಪರಿಚಯಿಸಲು ನಾವು ಸಂತೋಷಪಡುತ್ತೇವೆ.\nಕೆಳಗಿನ ಆಯ್ಕೆಗಳಲ್ಲಿ ಒಂದನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಮತ್ತು ಪುಟಗಳನ್ನು ಅನುಸರಿಸಿ</string>
+    <string name="about_text_block_1">ಈ ಮೊಬೈಲ್ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಐಸಿಎಆರ್-ರಾಷ್ಟ್ರೀಯ ಪ್ರಾಣಿ ಪೋಷಣಾ ಮತ್ತು ಶಾರೀರಶಾಸ್ತ್ರ ಸಂಸ್ಥೆ (NIANP), ಬೆಂಗಳೂರು, ವಿಜ್ಞಾನಿಗಳ ತಂಡದ ಮೂಲಕ ಅಭಿವೃದ್ಧಿಪಡಿಸಲಾಗಿದೆ.\nಈ ಅಪ್ಲಿಕೇಶನ್ ಹಸು ಅಥವಾ ಎಮ್ಮೆಗಳಿಗೆ ಲಭ್ಯವಿರುವ ಆಹಾರ ಪದಾರ್ಥಗಳೊಂದಿಗೆ ಕಡಿಮೆ ವೆಚ್ಚದಲ್ಲಿ ಸಮತೋಲನದ ಒಟ್ಟು ಮಿಶ್ರ ರೇಷನ್ ತಯಾರಿಸಲು ರೈತರಿಗೆ ಸಹಾಯಕವಾಗಿದೆ.\nಪೋಷಕಾಂಶದ ಅಗತ್ಯತೆಗಳನ್ನು ಐಸಿಎಆರ್ (2013) ಅಗತ್ಯತೆಗಳ ಆಧಾರದ ಮೇಲೆ ಲೆಕ್ಕಹಾಕಲಾಗುತ್ತದೆ ಮತ್ತು ಉದಾಹರಣೆಗಳನ್ನು ಪ್ರಾಯೋಗಿಕ ಕ್ಷೇತ್ರದ ಸ್ಥಿತಿಗತಿಗಳ ಆಧಾರದ ಮೇಲೆ ನೀಡಲಾಗುತ್ತದೆ.\nಕಡಿಮೆ ವೆಚ್ಚದ ಆಹಾರ ತಯಾರಿಕೆಗೆ ಉತ್ತಮ ಸಂಯೋಜನೆ ಪಡೆಯಲು ಹೆಚ್ಚಿನ ಸಂಖ್ಯೆಯ ಸ್ಥಳೀಯವಾಗಿ ಲಭ್ಯವಿರುವ ಪದಾರ್ಥಗಳನ್ನು ಬಳಸಲು ಪ್ರೋತ್ಸಾಹಿಸಲಾಗುತ್ತದೆ.</string>
+    <string name="about_text_block_2">ಅಸ್ವೀಕಾರ: ಲೆಕ್ಕಹಾಕಿದ ರೇಷನ್ ರಚನೆ ಬಳಕೆದಾರನಿಂದ ನೀಡಿದ ಇನ್‌ಪುಟ್ ಆಧಾರದ ಮೇಲೆ ಆಗಿದೆ, ಡೆವಲಪರ್‌ನಿಂದ ಅಲ್ಲ.\nಈ ಅಪ್ಲಿಕೇಶನ್ ಮೂಲಕ ರಚಿಸಲಾದ ರೇಷನ್ ಕೇವಲ ಮಾರ್ಗಸೂಚಿಯಾಗಿದೆ ಮತ್ತು ಯಾವುದೇ ವಾಣಿಜ್ಯ ಅಥವಾ ಕಾನೂನು ಉದ್ದೇಶಕ್ಕಾಗಿ ಇದನ್ನು ಹಕ್ಕುಹೊಂದಲು ಸಾಧ್ಯವಿಲ್ಲ.\nಅಪ್ಲಿಕೇಶನ್‌ನ ಯಾವುದೇ ತಪ್ಪು ಮಾರ್ಗದರ್ಶನ ಅಥವಾ ನಷ್ಟವನ್ನು ಡೆವಲಪರ್‌ನಿಂದ ಹಕ್ಕುಹೊಂದಲು ಸಾಧ್ಯವಿಲ್ಲ.\nಇದು ರೇಷನ್ ರಚನೆಯ ಮಾರ್ಗಸೂಚಿಯಾಗಿದೆ.\nಪ್ರಾಣಿಗಳಿಗೆ ಆಹಾರ ನೀಡುವ ಮೊದಲು ಪ್ರಾಣಿ ಪೋಷಣಾ ತಜ್ಞರಿಂದ ಇದನ್ನು ಪರಿಶೀಲಿಸಬಹುದು.\n© ಐಸಿಎಆರ್-ಎನ್‌ಐಎಎನ್‌ಪಿ, ಬೆಂಗಳೂರು, 2021</string>
+    <string name="software_assistance">ಸಾಫ್ಟ್‌ವೇರ್ ಸಹಾಯ:</string>
+    <string name="software_assistance_desc">• ಡಾ. ವಿಶಾಲ್ ಪಾಟೀಲ್ (ಜೈನ್ ವಿಶ್ವವಿದ್ಯಾಲಯ)\n• ಮಿಸ್ಟರ್ ವೃಷಭ್ ಜೈನ್ (ಜೈನ್ ವಿಶ್ವವಿದ್ಯಾಲಯ)\n• ಮಿಸ್ಟರ್ ಜೆರಿ (ಜೈನ್ ವಿಶ್ವವಿದ್ಯಾಲಯ)\n• ಡಾ. ರಾಧಾ ಗುಪ್ತ</string>
+    <string name="app_concept_and_development">ಅಪ್ಲಿಕೇಶನ್ ಪರಿಕಲ್ಪನೆ ಮತ್ತು ಅಭಿವೃದ್ಧಿ:</string>
+    <string name="app_concept_and_development_desc">• ಡಾ. ಡಿ.ರಾಜೇಂದ್ರನ್\n• ಡಾ. ಎನ್ ಕೆ ಎಸ್ ಗೌಡ\n• ಡಾ. ಎಸ್ ಅನನದನ್\n• ಡಾ. ಎಸ್‌ಬಿಎನ್ ರಾವ್\n• ಡಾ. ಡಿಟಿ ಪಾಲ್\n• ಡಾ. ಎಂ ಗೋಪಿ\n• ಡಾ. ರಾಘವೇಂದ್ರ ಭಟ್ಟ</string>
+    <string name="acknowledgement">ಕೃತಜ್ಞತೆ:</string>
+    <string name="welcome_to_icar_nianp">ಐಸಿಎಆರ್-ಎನ್‌ಐಎಎನ್‌ಪಿ ಗೆ ಸ್ವಾಗತ</string>
+    <string name="icar_nianp_website"><a href="http://nianp.res.in/">ಐಸಿಎಆರ್-ಎನ್‌ಐಎಎನ್‌ಪಿ ವೆಬ್‌ಸೈಟ್</a></string>
+    <string name="icar_nianp_desc">ಐಸಿಎಆರ್-ರಾಷ್ಟ್ರೀಯ ಪ್ರಾಣಿ ಪೋಷಣಾ ಮತ್ತು ಶಾರೀರಶಾಸ್ತ್ರ ಸಂಸ್ಥೆ (ಐಸಿಎಆರ್-ಎನ್‌ಐಎಎನ್‌ಪಿ) 1995ರ ನವೆಂಬರ್ 24 ರಂದು ಬೆಂಗಳೂರು, ಭಾರತೀಯ ಕೃಷಿ ಸಂಶೋಧನಾ ಪರಿಷತ್ (ಐಸಿಎಆರ್), ನವದೆಹಲಿಯ ಆಶ್ರಯದಲ್ಲಿ ಸ್ಥಾಪಿಸಲಾಯಿತು.\n\nಪ್ರಾಣಿ ಉತ್ಪಾದಕತೆ ಮತ್ತು ಪಶುಪಾಲಕರ ಲಾಭದಾಯಕತೆಯನ್ನು ಸುಧಾರಿಸಲು ಶಾರೀರಶಾಸ್ತ್ರ-ಪೋಷಣಾ ವಿಧಾನಗಳನ್ನು ಬಳಸಿಕೊಂಡು ಪ್ರಾಣಿ ಆಹಾರ ಸಂಪತ್ತಿನ ನಿರ್ವಹಣೆಯ ಕುರಿತು ಮೂಲಭೂತ ಮತ್ತು ಮೂಲಭೂತ ಸಂಶೋಧನೆಗಳನ್ನು ನಡೆಸಲು ಸಂಸ್ಥೆಗೆ ಆದೇಶಿಸಲಾಗಿದೆ.\n\nಸಂಸ್ಥೆಯ ಹೊಸ ಆವರಣವನ್ನು 2003ರ ಆಗಸ್ಟ್ 13 ರಂದು ಮಾನ್ಯ ಕೃಷಿ ಸಚಿವರಾದ ಶ್ರೀ ರಾಜನಾಥ್ ಸಿಂಗ್‌ಜಿ ಉದ್ಘಾಟಿಸಿದರು.</string>
+    <string name="cattle_and_buffalo_feed_formulation">Cattle and Buffalo Feed Formulation</string>
+    <string name="icar_nianp_2024">© ICAR-NIANP 2024</string>
+</resources>

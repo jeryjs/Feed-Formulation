@@ -1,0 +1,41 @@
+<!-- res/layout/fragment_cattle_selection.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    tools:context=".ui.tmrmaker.CattleSelectionFragment">
+
+    <TextView
+        android:id="@+id/textGreet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:textAlignment="center"
+        android:text="@string/tmrmaker_title"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:layout_below="@id/textGreet"
+        android:textAlignment="center"
+        android:text="@string/tmrmaker_greeting"
+        android:textSize="18sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCattle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textDesc"
+        android:layout_margin="8dp"
+        android:divider="?attr/dividerColor"
+        tools:listitem="@layout/item_cattle"
+        tools:layout_height="300dp"/>
+</RelativeLayout>

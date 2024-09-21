@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cattle_array">
+        <item>गाय</item>
+        <item>भैंस</item>
+    </string-array>
+
+    <string-array name="cattle_desc_array">
+        <item>क्रॉसब्रेड डेयरी गाय</item>
+        <item>दूध देने वाली भैंस</item>
+    </string-array>
+
+    <string-array name="pr_array">
+        <item>गर्भवती नहीं</item>
+        <item>6 महीने</item>
+        <item>7 महीने</item>
+        <item>8 महीने</item>
+    </string-array>
+</resources>

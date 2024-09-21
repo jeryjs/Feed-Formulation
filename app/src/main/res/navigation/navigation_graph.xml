@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.jery.feedformulation.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_feeds"
+        android:name="com.jery.feedformulation.ui.feedslist.FeedsFragment"
+        android:label="@string/menu_feeds"
+        tools:layout="@layout/fragment_feeds" />
+
+    <fragment
+        android:id="@+id/nav_tmrmaker"
+        android:name="com.jery.feedformulation.ui.tmrmaker.TmrmakerFragment"
+        android:label="@string/menu_tmrmaker"
+        tools:layout="@layout/fragment_tmrmaker" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.jery.feedformulation.ui.settings.SettingsFragment"
+        android:label="@string/menu_settings"/>
+
+    <fragment
+        android:id="@+id/nav_more"
+        android:name="com.jery.feedformulation.ui.more.MoreFragment"
+        android:label="@string/menu_more"
+        tools:layout="@layout/fragment_more" />
+
+    <fragment
+        android:id="@id/nav_example_tmr"
+        android:name="com.jery.feedformulation.ui.more.ExampleFragment"
+        android:label="@string/menu_example_tmr"
+        tools:layout="@layout/fragment_example" />
+
+    <fragment
+        android:id="@id/nav_example_cm"
+        android:name="com.jery.feedformulation.ui.more.ExampleFragment"
+        android:label="@string/menu_example_cm"
+        tools:layout="@layout/fragment_example" />
+
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.jery.feedformulation.ui.more.AboutFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_about" />
+
+    <fragment
+        android:id="@+id/nav_about_org"
+        android:name="com.jery.feedformulation.ui.more.AboutOrgFragment"
+        android:label="@string/nav_header_subtitle"
+        tools:layout="@layout/fragment_about_org" />
+
+</navigation>

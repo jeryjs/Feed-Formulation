@@ -1,0 +1,30 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/application">
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:icon="@android:drawable/ic_menu_compass"
+            app:key="theme_switch"
+            app:summary="@string/theme_switch_desc"
+            app:title="@string/theme_switch" />
+
+        <ListPreference
+            app:defaultValue="en"
+            app:entries="@array/language_options"
+            app:entryValues="@array/language_values"
+            app:key="language"
+            app:summary="@string/language_desc"
+            app:title="@string/language"
+            app:icon="@android:drawable/ic_menu_always_landscape_portrait" />
+
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:icon="@android:drawable/ic_menu_mylocation"
+            app:key="use_bottom_nav"
+            app:summary="@string/use_bottom_navigation_desc"
+            app:title="@string/use_bottom_navigation" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
