@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.jery.feedformulation.R
 import com.jery.feedformulation.databinding.FragmentResultBinding
 import com.jery.feedformulation.viewmodel.TmrmakerViewModel
-import com.jery.feedformulation.model.SimplexResult
 import com.jery.feedformulation.utils.Simplex
 
 class ResultFragment : Fragment() {
@@ -43,8 +42,8 @@ class ResultFragment : Fragment() {
         stringBuilder.append("Total CP: ${"%.2f".format(simplexResult.totalCp)}\n")
         stringBuilder.append("Total TDN: ${"%.2f".format(simplexResult.totalTdn)}\n\n")
         stringBuilder.append("Feed Weights:\n")
-        simplexResult.feedWeights.filter { it.second > 0.0 }.forEach { (feedName, weight) ->
-            stringBuilder.append("$feedName: ${"%.2f".format(weight)} Kg\n")
+        simplexResult.feedWeights.filter { it.second > 0.0 }.forEach { (feed, weight) ->
+            stringBuilder.append("${feed.name}: ${"%.2f".format(weight)} Kg\n")
         }
         binding.tvLog.text = stringBuilder.toString()
     }

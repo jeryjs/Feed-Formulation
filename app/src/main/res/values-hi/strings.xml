@@ -1,0 +1,42 @@
+<!-- res/values-kn/strings.xml -->
+<resources>
+    <string name="app_name">फीड फॉर्मूलेशन</string>
+    <string name="menu_home">होम</string>
+    <string name="menu_feeds">फीड्स</string>
+    <string name="menu_tmrmaker">टीएमआर मेकर</string>
+    <string name="menu_settings">सेटिंग्स</string>
+    <string name="menu_more">और</string>
+    <string name="menu_about">के बारे में</string>
+    <string name="menu_example_tmr">टीएमआर का उदाहरण</string>
+    <string name="menu_example_cm">कंसंट्रेट मिक्सचर का उदाहरण</string>
+    <string name="theme_switch">दिन/रात</string>
+    <string name="theme_switch_desc">दिन और रात थीम के बीच स्विच करें</string>
+    <string name="application">एप्लिकेशन</string>
+    <string name="language">भाषा</string>
+    <string name="language_desc">भाषा बदलें</string>
+    <string name="body_weight_kg">शरीर का वजन (KG)</string>
+    <string name="milk_yield_kg">दूध उत्पादन (KG)</string>
+    <string name="milk_fat">दूध की वसा (%)</string>
+    <string name="pregnant_m">गर्भवती (M)</string>
+    <string name="use_bottom_navigation">निचला नेविगेशन का उपयोग करें</string>
+    <string name="use_bottom_navigation_desc">निचले और साइड नेविगेशन के बीच स्विच करें</string>
+    <string name="navigation_drawer_open">नेविगेशन ड्रॉअर खोलें</string>
+    <string name="navigation_drawer_close">नेविगेशन ड्रॉअर बंद करें</string>
+    <string name="select_feeds">फीड्स चुनें [%1$s]</string>
+    <string name="select_cattle">पशु चुनें</string>
+    <string name="nutrient_requirements">पोषक तत्व आवश्यकताएँ [%1$s]</string>
+    <string name="feeds_to_be_included_in_ration_for">राशन में शामिल करने के लिए फीड्स %1$s</string>
+    <string name="tmrmaker_title">गाय और भैंस के लिए फीड फॉर्मूलेशन</string>
+    <string name="tmrmaker_greeting">हम दूध देने वाली गाय और भैंस के लिए कुल मिश्रित राशन बनाने के लिए एंड्रॉइड एप्लिकेशन पेश करने में प्रसन्न हैं।\nनीचे दिए गए विकल्पों में से एक पर क्लिक करें और पृष्ठों का पालन करें</string>
+    <string name="about_text_block_1">यह मोबाइल एप्लिकेशन आईसीएआर-राष्ट्रीय पशु पोषण और शरीर क्रिया विज्ञान संस्थान (NIANP), बेंगलुरु के वैज्ञानिकों की टीम द्वारा विकसित किया गया है।\nयह एप्लिकेशन किसानों को उपलब्ध खाद्य सामग्री के साथ कम लागत में संतुलित कुल मिश्रित राशन तैयार करने में मदद करता है।\nपोषक तत्व आवश्यकताओं की गणना आईसीएआर (2013) आवश्यकताओं के आधार पर की जाती है और उदाहरण व्यावहारिक क्षेत्र की स्थितियों के आधार पर दिए जाते हैं।\nकम लागत वाले खाद्य उत्पादन के लिए बेहतर संयोजन प्राप्त करने के लिए अधिक संख्या में स्थानीय रूप से उपलब्ध सामग्री का उपयोग करने के लिए प्रोत्साहित किया जाता है।</string>
+    <string name="about_text_block_2">अस्वीकरण: गणना की गई राशन संरचना उपयोगकर्ता द्वारा प्रदान किए गए इनपुट पर आधारित है, डेवलपर द्वारा नहीं।\nइस एप्लिकेशन के माध्यम से बनाई गई राशन केवल एक मार्गदर्शिका है और इसे किसी भी व्यावसायिक या कानूनी उद्देश्य के लिए दावा नहीं किया जा सकता है।\nएप्लिकेशन के किसी भी गलत मार्गदर्शन या नुकसान के लिए डेवलपर को दावा नहीं किया जा सकता है।\nयह राशन संरचना के लिए एक मार्गदर्शिका है।\nपशुओं को खिलाने से पहले इसे पशु पोषण विशेषज्ञ से जांचा जा सकता है।\n© आईसीएआर-एनआईएएनपी, बेंगलुरु, 2021</string>
+    <string name="software_assistance">सॉफ्टवेयर सहायता:</string>
+    <string name="software_assistance_desc">• डॉ. विशाल पाटिल (जैन विश्वविद्यालय)\n• श्री वृषभ जैन (जैन विश्वविद्यालय)\n• श्री जेरी (जैन विश्वविद्यालय)\n• डॉ. राधा गुप्ता</string>
+    <string name="app_concept_and_development">एप्लिकेशन अवधारणा और विकास:</string>
+    <string name="app_concept_and_development_desc">• डॉ. डी.राजेंद्रन\n• डॉ. एन के एस गौड़ा\n• डॉ. एस अननदन\n• डॉ. एसबीएन राव\n• डॉ. डीटी पॉल\n• डॉ. एम गोपी\n• डॉ. राघवेंद्र भट्ट</string>
+    <string name="acknowledgement">आभार:</string>
+    <string name="welcome_to_icar_nianp">आईसीएआर-एनआईएएनपी में आपका स्वागत है</string>
+    <string name="icar_nianp_website"><a href="http://nianp.res.in/">आईसीएआर-एनआईएएनपी वेबसाइट</a></string>
+    <string name="icar_nianp_desc">आईसीएआर-राष्ट्रीय पशु पोषण और शरीर क्रिया विज्ञान संस्थान (आईसीएआर-एनआईएएनपी) 24 नवंबर 1995 को बेंगलुरु में भारतीय कृषि अनुसंधान परिषद (आईसीएआर), नई दिल्ली के तहत स्थापित किया गया था।\n\nपशु उत्पादकता और पशुपालकों की लाभप्रदता में सुधार के लिए शरीर क्रिया विज्ञान-पोषण दृष्टिकोण का उपयोग करके पशु खाद्य संसाधनों के प्रबंधन पर मौलिक और अनुप्रयुक्त अनुसंधान करने के लिए संस्थान को आदेशित किया गया है।\n\nसंस्थान के नए परिसर का उद्घाटन 13 अगस्त 2003 को माननीय कृषि मंत्री श्री राजनाथ सिंहजी द्वारा किया गया था।</string>
+    <string name="cattle_and_buffalo_feed_formulation">गाय और भैंस के लिए फीड फॉर्मूलेशन</string>
+</resources>

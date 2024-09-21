@@ -3,11 +3,15 @@
     <string-array name="language_options">
         <item>English</item>
         <item>ಕನ್ನಡ</item>
+        <item>हिन्दी</item>
+        <item>தமிழ்</item>
     </string-array>
 
     <string-array name="language_values">
         <item>en</item>
         <item>kn</item>
+        <item>hi</item>
+        <item>ta</item>
     </string-array>
 
 

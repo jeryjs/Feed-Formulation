@@ -81,7 +81,7 @@ class Simplex internal constructor() {
         tmrmakerViewModel.setResult(
             SimplexResult(
                 total_dm, total_cp, total_tdn,
-                feeds.mapIndexed { index, feed -> feed.name to ans[index] }
+                feeds.mapIndexed { index, feed -> feed to ans[index] }
             )
         )
     }

@@ -58,7 +58,7 @@ class CattleSelectionFragment : Fragment() {
                 R.anim.enter_from_left,
                 R.anim.exit_to_right
             )
-            replace(R.id.fragment_container, NutrientSelectionFragment())
+            replace(R.id.fragment_container_tmrmaker, NutrientSelectionFragment())
             addToBackStack(null)
         }
     }

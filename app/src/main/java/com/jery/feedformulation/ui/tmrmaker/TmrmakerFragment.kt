@@ -28,7 +28,7 @@ class TmrmakerFragment : Fragment() {
         // Initialize with the CattleSelectionFragment
         if (savedInstanceState == null) {
             childFragmentManager.commit {
-                replace(R.id.fragment_container, CattleSelectionFragment())
+                replace(R.id.fragment_container_tmrmaker, CattleSelectionFragment())
             }
         }
 
@@ -44,7 +44,7 @@ class TmrmakerFragment : Fragment() {
     }
 
     private fun navigateToNextFragment() {
-        val currentFragment = childFragmentManager.findFragmentById(R.id.fragment_container)
+        val currentFragment = childFragmentManager.findFragmentById(R.id.fragment_container_tmrmaker)
         val nextFragment = when (currentFragment) {
             is CattleSelectionFragment -> NutrientSelectionFragment()
             is NutrientSelectionFragment -> FeedSelectionFragment()
@@ -55,14 +55,14 @@ class TmrmakerFragment : Fragment() {
         nextFragment?.let {
             childFragmentManager.commit {
                 setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
-                replace(R.id.fragment_container, it)
+                replace(R.id.fragment_container_tmrmaker, it)
                 addToBackStack(null)
             }
         }
     }
 
     private fun updateFabVisibility() {
-        val currentFragment = childFragmentManager.findFragmentById(R.id.fragment_container)
+        val currentFragment = childFragmentManager.findFragmentById(R.id.fragment_container_tmrmaker)
         binding.fabNext.visibility = if (currentFragment is CattleSelectionFragment) View.GONE else View.VISIBLE
     }
 
